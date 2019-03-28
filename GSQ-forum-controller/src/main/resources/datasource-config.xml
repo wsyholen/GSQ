@@ -30,7 +30,10 @@
         <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
         <property name="poolPreparedStatements" value="${jdbc.druid.pool-prepared-statements}"/>
         <!-- 数据库密码是否加密 -->
-        <property name="connectionProperties" value="config.decrypt=${jdbc.druid.config.decrypt}"/>
+        <property name="connectionProperties" value="config.decrypt=${jdbc.druid.config.decrypt}" />
+        <!-- 开启Druid的监控统计功能 -->
+        <property name="filters" value="config" />
+
     </bean>
 
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
