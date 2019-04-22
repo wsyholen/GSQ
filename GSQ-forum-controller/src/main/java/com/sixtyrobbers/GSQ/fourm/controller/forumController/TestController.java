@@ -46,7 +46,7 @@ public class TestController {
      * Version: V1.0
      * </pre>
      */
-    @RequestMapping(value = "/testPage")
+    @RequestMapping(value = "/v1.0/testPage")
     @ResponseBody
     public BaseResult testForPage(TestReq testRequest, HttpServletRequest request) {
         String sessionid = request.getSession().getId();
@@ -62,7 +62,7 @@ public class TestController {
      * Version: V1.0
      * </pre>
      */
-    @RequestMapping(value = "/test")
+    @RequestMapping(value = "/test1")
     @ResponseBody
     public BaseResult test(TestReq testRequest) {
         logger.info("properties value controller：" + testProperties);
@@ -71,7 +71,6 @@ public class TestController {
         TestRes result = testService.test(testRequest);
         return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), result);
     }
-
 
 
 }

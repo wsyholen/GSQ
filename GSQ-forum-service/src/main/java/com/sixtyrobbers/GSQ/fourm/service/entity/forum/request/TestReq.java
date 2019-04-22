@@ -16,6 +16,9 @@ public class TestReq extends BaseRequest implements Serializable{
 
     private static final long serialVersionUID = 6825112721073891216L;
 
+    /**
+     *
+     */
     private String name;
 
     public String getName() {

@@ -19,7 +19,7 @@ public class DesensitizeUtil {
      * @param index    1 为第index位
      * @return
      */
-    public String left(String fullName, int index) {
+    public static String left(String fullName, int index) {
         if (StringUtils.isBlank(fullName)) {
             return "";
         }
@@ -35,7 +35,7 @@ public class DesensitizeUtil {
      * @param end   2
      * @return
      */
-    public String around(String name, int index, int end) {
+    public static String around(String name, int index, int end) {
         if (StringUtils.isBlank(name)) {
             return "";
         }
@@ -48,7 +48,7 @@ public class DesensitizeUtil {
      * @param num
      * @return
      */
-    public String right(String num, int end) {
+    public static String right(String num, int end) {
         if (StringUtils.isBlank(num)) {
             return "";
         }
@@ -64,7 +64,7 @@ public class DesensitizeUtil {
      * 联系方式: 317776764
      * </pre>
      */
-    public String middle(String fullName) {
+    public static String middle(String fullName) {
         if (StringUtils.isBlank(fullName)) {
             return "";
         }
