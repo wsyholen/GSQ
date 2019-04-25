@@ -23,6 +23,28 @@
         </dependency>
         <!--项目模块依赖 end-->
 
+        <!-- 数据库相关注解包 start -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- 数据库相关注解包 end -->
+
+        <!-- get set等注解包 start-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- get set等注解包 end-->
     </dependencies>
 
 </project>
