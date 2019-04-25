@@ -27,7 +27,7 @@ public class BaseDO implements Serializable {
     /**
      * 有效标志
      */
-    private int flag;
+    private int validFlag;
 
     public String getCreateTime() {
         return createTime;
@@ -45,11 +45,11 @@ public class BaseDO implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public int getFlag() {
-        return flag;
+    public int getValidFlag() {
+        return validFlag;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
+    public void setValidFlag(int validFlag) {
+        this.validFlag = validFlag;
     }
 }

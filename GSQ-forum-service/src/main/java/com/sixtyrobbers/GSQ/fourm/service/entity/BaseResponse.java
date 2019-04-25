@@ -27,7 +27,7 @@ public class BaseResponse implements Serializable {
     /**
      * 删除标识
      */
-    private String flag;
+    private String validFlag;
 
     public String getCreateTime() {
         return createTime;
@@ -45,11 +45,11 @@ public class BaseResponse implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getFlag() {
-        return flag;
+    public String getValidFlag() {
+        return validFlag;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setValidFlag(String validFlag) {
+        this.validFlag = validFlag;
     }
 }
