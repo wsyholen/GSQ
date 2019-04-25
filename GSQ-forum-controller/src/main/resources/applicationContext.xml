@@ -17,6 +17,9 @@
 
     <task:annotation-driven/>
 
+    <!-- 开启事务注解解析-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
     <context:component-scan base-package="com.sixtyrobbers.GSQ.fourm.service"/>
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="false"/>
