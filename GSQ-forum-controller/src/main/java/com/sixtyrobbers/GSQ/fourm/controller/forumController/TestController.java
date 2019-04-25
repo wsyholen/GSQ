@@ -62,6 +62,7 @@ public class TestController {
      * Version: V1.0
      * </pre>
      */
+
     @RequestMapping(value = "/test1")
     @ResponseBody
     public BaseResult test(TestReq testRequest) {
