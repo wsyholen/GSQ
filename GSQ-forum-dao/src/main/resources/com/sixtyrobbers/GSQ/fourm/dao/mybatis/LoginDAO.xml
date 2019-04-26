@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixtyrobbers.GSQ.fourm.dao.forum.LoginDAO">
+
+    <select id="login" parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.LoginParam"
+            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dto.LoginDTO">
+        SELECT
+	      gfu.user_id,
+	      gfu.login_phone,
+	      gfu.login_email,
+	      gfu.user_sex,
+          gfu.user_name,
+          gfu.user_hobby,
+          gfu.user_introduce,
+          gfu.user_occupation,
+          gfup1.user_picture_url AS backUrl,
+          gfup2.user_picture_url AS imagUrl
+        FROM
+	      gsq_fourm_user gfu
+	    LEFT JOIN gsq_forum_user_picture gfup1 ON gfu.back_id = gfup1.id
+	    LEFT JOIN gsq_forum_user_picture gfup2 ON gfu.imag_id = gfup2.id
+        WHERE
+          0=0
+        <if test="loginPhone !=null and loginPhone != ''">
+          AND  gfu.login_phone = #{loginPhone}
+        </if>
+        <if test="loginEmail !=null and loginEmail != ''">
+          AND  gfu.login_email = #{loginEmail}
+        </if>
+	      AND gfu.login_password = #{password}
+	      AND gfu.valid_flag = 0
+
+    </select>
+
+</mapper>

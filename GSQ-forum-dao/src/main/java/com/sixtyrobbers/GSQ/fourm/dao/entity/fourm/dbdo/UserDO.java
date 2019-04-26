@@ -72,7 +72,7 @@ public class UserDO  implements Serializable {
 	 * 性别:0:男；1:女
 	 */
    	@Column(name = "user_sex" )
-	private Long userSex;
+	private Integer userSex;
 
 	/**
 	 * 个人介绍
@@ -138,6 +138,6 @@ public class UserDO  implements Serializable {
 	 * 有效标志位：0：存在；1：删除
 	 */
    	@Column(name = "valid_flag" )
-	private Long validFlag;
+	private Integer validFlag;
 
 }

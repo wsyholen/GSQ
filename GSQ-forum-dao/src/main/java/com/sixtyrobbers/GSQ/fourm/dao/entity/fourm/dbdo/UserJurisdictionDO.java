@@ -37,43 +37,43 @@ public class UserJurisdictionDO  implements Serializable {
 	 * 私信：0：开放；1：不开放
 	 */
    	@Column(name = "message" )
-	private Long message;
+	private Integer message;
 
 	/**
 	 * 关注：0：开放；1：不开放
 	 */
    	@Column(name = "attentionliu" )
-	private Long attentionliu;
+	private Integer attentionliu;
 
 	/**
 	 * 浏览历史：0：开放；1：不开放
 	 */
    	@Column(name = "browsing_history" )
-	private Long browsingHistory;
+	private Integer browsingHistory;
 
 	/**
 	 * 我的文章：0：开放；1：不开放
 	 */
    	@Column(name = "my_article" )
-	private Long myArticle;
+	private Integer myArticle;
 
 	/**
 	 * 我的关注：0：开放；1：不开放
 	 */
    	@Column(name = "my_attentionliup" )
-	private Long myAttentionliup;
+	private Integer myAttentionliup;
 
 	/**
 	 * 我的评论：0：开放；1：不开放
 	 */
    	@Column(name = "my_comments" )
-	private Long myComments;
+	private Integer myComments;
 
 	/**
 	 * 我的点赞：0：开放；1：不开放
 	 */
    	@Column(name = "my_praise" )
-	private Long myPraise;
+	private Integer myPraise;
 
 	/**
 	 * 创建时间

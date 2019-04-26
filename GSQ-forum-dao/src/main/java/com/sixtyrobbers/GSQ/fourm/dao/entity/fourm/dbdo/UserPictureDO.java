@@ -31,7 +31,7 @@ public class UserPictureDO  implements Serializable {
 	 * 图片分类
 	 */
    	@Column(name = "picture_type" )
-	private String pictureType;
+	private Integer pictureType;
 
 	/**
 	 * 图片地址
@@ -55,6 +55,6 @@ public class UserPictureDO  implements Serializable {
 	 * 有效标志位：0：有效；1：无效
 	 */
    	@Column(name = "vaild_flag" )
-	private Long vaildFlag;
+	private Integer vaildFlag;
 
 }

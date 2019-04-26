@@ -49,6 +49,6 @@ public class RoleDO  implements Serializable {
 	 * 有效标志位：0：存在；1：删除
 	 */
    	@Column(name = "valid_flag" )
-	private Long validFlag;
+	private Integer validFlag;
 
 }

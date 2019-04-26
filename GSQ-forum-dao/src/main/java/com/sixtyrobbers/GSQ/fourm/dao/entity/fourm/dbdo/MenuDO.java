@@ -46,7 +46,7 @@ public class MenuDO  implements Serializable {
 	 * 是否是父级：0是；1：不是
 	 */
    	@Column(name = "parent" )
-	private Long parent;
+	private Integer parent;
 
 	/**
 	 * 节点id
@@ -70,6 +70,6 @@ public class MenuDO  implements Serializable {
 	 * 有效标志位：0：存在；1：删除
 	 */
    	@Column(name = "valid_flag" )
-	private Long validFlag;
+	private Integer validFlag;
 
 }

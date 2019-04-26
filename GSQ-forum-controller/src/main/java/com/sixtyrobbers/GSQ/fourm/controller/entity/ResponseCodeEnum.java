@@ -13,22 +13,57 @@ public enum ResponseCodeEnum {
     /**
      * 请求成功时错误码、描述
      */
-    ERROR_CODE_SUCCESS("", ""),
+    ERROR_CODE_SUCCESS("1000", "请求成功！"),
 
     /**
      * 请求失败时错误码、描述
      */
-    ERROR_CODE_ERROR("ERROR_CODE_ERROR", "请求失败！"),
+    ERROR_CODE_ERROR("1001", "请求失败！"),
 
     /**
      * 入参错误
      */
-    ERROR_CODE_PARAM("1001","入参错误"),
+    ERROR_CODE_PARAM("1002","入参错误！"),
 
     /**
      * 缺少参数
      */
-    ERROR_CODE_LACK_PARAM("1002","缺少参数");
+    ERROR_CODE_LACK_PARAM("1003","缺少参数！"),
+
+    /**
+     * 登陆成功
+     */
+    ERROR_CODE_LOGIN_SUCCESS("1004","登陆成功！"),
+
+    /**
+     * 登陆失败
+     */
+    ERROR_CODE_LOGIN_ERROR("1005","登陆失败！"),
+
+    /**
+     * 短线发送失败
+     */
+    ERROR_CODE_SEND_MESSAGE_ERROR("1006","短信发送失败！"),
+
+    /**
+     * 短线发送成功
+     */
+    ERROR_CODE_SEND_MESSAGE_SUCCESS("1007","短信发送成功！"),
+
+    /**
+     * 验证码过期
+     */
+    ERROR_CODE_CODE_DUE("1008","验证码过期！"),
+
+    /**
+     * 验证码错误
+     */
+    ERROR_CODE_CODE_ERROR("1009","验证码错误！"),
+
+    /**
+     * 注册成功
+     */
+    ERROR_CODE_REGISTER_SUCCESS("1010","注册成功！");
 
 
     private String code;

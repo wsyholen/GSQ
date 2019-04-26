@@ -32,5 +32,44 @@
             <value>UTF-8</value>
         </property>
     </bean>
+
+    <!-- redis 配置 start -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxActive" value="${redis.pool.maxWait}"></property>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"></property>
+        <property name="maxWait" value="${redis.pool.maxWait}"></property>
+        <property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}"></property>
+        <property name="numTestsPerEvictionRun" value="${redis.pool.numTestsPerEvictionRun}"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}"></property>
+        <property name="whenExhaustedAction" value="${redis.pool.whenExhaustedAction}"></property>
+    </bean>
+
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
+        <property name="hostName" value="${redis.host}"></property>
+        <property name="port" value="${redis.port}"></property>
+        <property name="password" value="${redis.password}"></property>
+        <property name="timeout" value="${redis.timeout}"></property>
+        <property name="usePool" value="${redis.usePool}"></property>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="com.sixtyrobbers.GSQ.fourm.common.redis.HessianRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="com.sixtyrobbers.GSQ.fourm.common.redis.HessianRedisSerializer"/>
+        </property>
+    </bean>
+
+    <!-- redis 配置 end -->
+
     <import resource="classpath:datasource-config.xml"/>
 </beans>

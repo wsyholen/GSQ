@@ -55,6 +55,6 @@ public class ArticlePraiseDO  implements Serializable {
 	 * 有效标志位：0：有效；1：无效
 	 */
    	@Column(name = "valide_flag" )
-	private Long valideFlag;
+	private Integer valideFlag;
 
 }

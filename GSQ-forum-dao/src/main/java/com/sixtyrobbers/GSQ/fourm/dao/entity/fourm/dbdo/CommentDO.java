@@ -61,6 +61,6 @@ public class CommentDO  implements Serializable {
 	 * 有效标志位：0：存在；1：删除
 	 */
    	@Column(name = "vaild_flag" )
-	private Long vaildFlag;
+	private Integer vaildFlag;
 
 }

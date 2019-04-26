@@ -64,19 +64,19 @@ public class ArticleDO  implements Serializable {
 	 * 文章权限：0：私人；1：开放
 	 */
    	@Column(name = "article_jurisdiction" )
-	private Long articleJurisdiction;
+	private Integer articleJurisdiction;
 
 	/**
 	 * 文章点击次数
 	 */
    	@Column(name = "article_trigger" )
-	private Long articleTrigger;
+	private Integer articleTrigger;
 
 	/**
 	 * 是否推荐：0：推荐；1：不推荐
 	 */
    	@Column(name = "recommend" )
-	private Long recommend;
+	private Integer recommend;
 
 	/**
 	 * 创建时间
@@ -94,12 +94,12 @@ public class ArticleDO  implements Serializable {
 	 * 更新次数
 	 */
    	@Column(name = "update_size" )
-	private Long updateSize;
+	private Integer updateSize;
 
 	/**
 	 * 有效标志位：0：存在；1：删除
 	 */
    	@Column(name = "valide_falg" )
-	private Long valideFalg;
+	private Integer valideFalg;
 
 }

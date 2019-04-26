@@ -55,6 +55,6 @@ public class UserHistoryDO  implements Serializable {
 	 * 有效标志位：0：有效；1：无效
 	 */
    	@Column(name = "valid_flag" )
-	private Long validFlag;
+	private Integer validFlag;
 
 }
