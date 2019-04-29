@@ -96,13 +96,13 @@ public class UserDO  implements Serializable {
 	 * 最后登陆时间
 	 */
    	@Column(name = "last_login" )
-	private Date lastLogin;
+	private String lastLogin;
 
 	/**
 	 * 最后登出时间
 	 */
    	@Column(name = "last_logout" )
-	private Date lastLogout;
+	private String lastLogout;
 
 	/**
 	 * 登陆ip
@@ -114,7 +114,7 @@ public class UserDO  implements Serializable {
 	 * 创建时间
 	 */
    	@Column(name = "create_time" )
-	private Date createTime;
+	private String createTime;
 
 	/**
 	 * 创建程序名
@@ -126,7 +126,7 @@ public class UserDO  implements Serializable {
 	 * 更新时间
 	 */
    	@Column(name = "update_time" )
-	private Date updateTime;
+	private String updateTime;
 
 	/**
 	 * 更新程序名

@@ -63,9 +63,24 @@ public enum ResponseCodeEnum {
     /**
      * 注册成功
      */
-    ERROR_CODE_REGISTER_SUCCESS("1010","注册成功！");
+    ERROR_CODE_REGISTER_SUCCESS("1010","注册成功！"),
 
-
+    /**
+     * 修改密码成功
+     */
+    ERROR_CODE_MODIFY_SUCCESS("2010","修改密码成功！"),
+    /**
+     * 重新输入的新密码与第一次不一致!
+     */
+    ERROR_CODE_MODIFY_ERROR("2011","两次密码输入不同！"),
+    /**
+     * 手机号不存在
+     */
+    ERROR_CODE_PHONE_ERROR("2012","手机号不存在！"),
+    /**
+     * 密码错误
+     */
+    ERROR_CODE_PASSWORD_ERROR("2013","手机号不存在！");
     private String code;
 
     private String value;

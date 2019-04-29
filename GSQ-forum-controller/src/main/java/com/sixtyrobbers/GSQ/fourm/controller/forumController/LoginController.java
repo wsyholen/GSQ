@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
-import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.ArticleCommentDO;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.constant.RedisConstant;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.LoginRes;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.LoginService;
@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -89,6 +88,51 @@ public class LoginController {
     }
 
     /**
+     * @Description: 修改密码
+     * @Author: luoheng
+     * @CreateDate: 2019/4/28 18:52
+     * @Version: 1.0
+     */
+    @RequestMapping(value = "/V1.0/modifyPasswoed", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResult modifyPassword(@RequestBody ModifyPasswordReq modifyPasswordReq) {
+        if (modifyPasswordReq.getLoginPhone() == null || modifyPasswordReq.getLoginPhone() == "") {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "账号不能为空!");
+        }
+        if (modifyPasswordReq.getLoginPassword() == null || modifyPasswordReq.getLoginPassword() == "") {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "密码不能为空！");
+        }
+        if (modifyPasswordReq.getNewPassword() == null || modifyPasswordReq.getNewPassword() == "") {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "新密码不能为空!");
+        }
+        if (modifyPasswordReq.getSecondPassword() == null || modifyPasswordReq.getSecondPassword() == "") {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "重新输入新密码不能为空!");
+        }
+        if (!modifyPasswordReq.getNewPassword().equals(modifyPasswordReq.getSecondPassword())) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getValue(), "重新输入的新密码与第一次不一致!");
+        }
+        try {
+            if (!userService.isUserDOExist(modifyPasswordReq.getLoginPhone())) {
+                return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PHONE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PHONE_ERROR.getValue(), "该用户不存在!");
+            } else {
+                if (modifyPasswordReq.getLoginPassword().equals(userService.getPasswordByLoginPhone(modifyPasswordReq.getLoginPhone()))) {
+                    userService.modifyPasswordByLoginPhone(modifyPasswordReq.getLoginPhone(), modifyPasswordReq.getNewPassword());
+                    return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "修改密码成功！");
+                } else {
+                    return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PASSWORD_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PASSWORD_ERROR.getValue(), "密码输入错误！");
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error("修改密码--业务异常，param:{},error:{}", JSONObject.toJSONString(modifyPasswordReq), e.getMessage());
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "修改密码失败！");
+        }
+
+
+    }
+
+
+    /**
      * <pre>
      * Explain: 发送验证码
      * Author: holennnnnn_
@@ -151,6 +195,7 @@ public class LoginController {
                 return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
             }
         }
+
 
     }
 }

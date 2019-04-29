@@ -1,5 +1,8 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
+import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 
 /**
@@ -22,4 +25,27 @@ public interface UserService {
      */
     void addUser(RegisterReq registerReq);
 
+    /**
+     * @Description:    判断用户是否存在
+     * @Author:         luoheng
+     * @CreateDate:     2019/4/29 18:48
+     * @Version:        1.0
+     */
+    boolean isUserDOExist(String loginPhone);
+
+    /**
+     * @Description:    根据用户得到密码
+     * @Author:         luoheng
+     * @CreateDate:     2019/4/29 19:01
+     * @Version:        1.0
+     */
+    String getPasswordByLoginPhone(String loginPhone);
+
+   /**
+    * @Description:    修改密码
+    * @Author:         luoheng
+    * @CreateDate:     2019/4/29 19:14
+    * @Version:        1.0
+    */
+    void modifyPasswordByLoginPhone(String loginPhone,String newpassword);
 }
