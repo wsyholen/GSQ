@@ -25,6 +25,12 @@
             <artifactId>GSQ-forum-common</artifactId>
             <version>${healthcare.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <!--项目模块依赖 end-->
 

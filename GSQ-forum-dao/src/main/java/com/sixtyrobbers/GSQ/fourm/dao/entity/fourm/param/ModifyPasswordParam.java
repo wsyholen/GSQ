@@ -1,21 +1,15 @@
-package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
+package com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 
-/**
- * @Description:    修改密码请求入参
- * @Author:         luoheng
- * @CreateDate:     2019/4/28 18:48
- * @Version:        1.0
- */
 @Getter
 @Setter
-public class ModifyPasswordReq implements Serializable {
+public class ModifyPasswordParam implements Serializable {
 
-    private static final long serialVersionUID = 4157359361431469769L;
+    private static final long serialVersionUID = 2204762209170788087L;
 
     /**
      * 手机号

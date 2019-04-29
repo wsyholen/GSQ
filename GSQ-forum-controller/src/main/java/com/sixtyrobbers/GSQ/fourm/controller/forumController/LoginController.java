@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -111,24 +112,21 @@ public class LoginController {
         if (!modifyPasswordReq.getNewPassword().equals(modifyPasswordReq.getSecondPassword())) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getValue(), "重新输入的新密码与第一次不一致!");
         }
+        String result = null;
         try {
-            if (!userService.isUserDOExist(modifyPasswordReq.getLoginPhone())) {
-                return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PHONE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PHONE_ERROR.getValue(), "该用户不存在!");
-            } else {
-                if (modifyPasswordReq.getLoginPassword().equals(userService.getPasswordByLoginPhone(modifyPasswordReq.getLoginPhone()))) {
-                    userService.modifyPasswordByLoginPhone(modifyPasswordReq.getLoginPhone(), modifyPasswordReq.getNewPassword());
-                    return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "修改密码成功！");
-                } else {
-                    return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PASSWORD_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PASSWORD_ERROR.getValue(), "密码输入错误！");
-                }
+            result = userService.modifyPasswordByLoginPhone(modifyPasswordReq);
+            if (result.equals("1")) {
+                return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "修改密码成功！");
+            } else if (result.equals("0")){
+                return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERRORS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERRORS.getValue(), "修改密码失败！");
+            }else if (result.equals("请确定账号或密码是否正确！")){
+                return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getValue(), result);
             }
-
+            return null;
         } catch (Exception e) {
             logger.error("修改密码--业务异常，param:{},error:{}", JSONObject.toJSONString(modifyPasswordReq), e.getMessage());
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "修改密码失败！");
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
         }
-
-
     }
 
 
@@ -195,7 +193,6 @@ public class LoginController {
                 return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
             }
         }
-
-
     }
+
 }

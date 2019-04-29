@@ -1,6 +1,5 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService.forumServiceImpl;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sixtyrobbers.GSQ.fourm.common.util.ALiSendMessageUtil;
@@ -8,7 +7,6 @@ import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dto.LoginDTO;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.LoginParam;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.LoginDAO;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.LoginRes;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.LoginService;
 import org.slf4j.Logger;

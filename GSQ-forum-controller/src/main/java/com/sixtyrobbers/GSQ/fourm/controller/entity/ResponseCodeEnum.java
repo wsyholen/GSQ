@@ -70,17 +70,17 @@ public enum ResponseCodeEnum {
      */
     ERROR_CODE_MODIFY_SUCCESS("2010","修改密码成功！"),
     /**
-     * 重新输入的新密码与第一次不一致!
+     * 修改密码错误
      */
-    ERROR_CODE_MODIFY_ERROR("2011","两次密码输入不同！"),
+    ERROR_CODE_MODIFY_ERRORS("2011","修改密码失败！"),
     /**
-     * 手机号不存在
+     * 重新输入的新密码与第一次不一致
      */
-    ERROR_CODE_PHONE_ERROR("2012","手机号不存在！"),
+    ERROR_CODE_MODIFY_ERROR("2012","两次密码输入不同！"),
     /**
-     * 密码错误
+     * 手机号或密码有误
      */
-    ERROR_CODE_PASSWORD_ERROR("2013","手机号不存在！");
+    ERROR_CODE_PHONE_PASSWORD_ERROR("2013","手机号或密码有误！");
     private String code;
 
     private String value;
