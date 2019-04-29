@@ -24,7 +24,7 @@
                 #{id, jdbcType=VARCHAR},
             </if>
             <if test="account != null and account != ''">
-                #{account, jdbcType=VARCHAR},
+            #{account, jdbcType=VARCHAR},
             </if>
             <if test="password != null and password != ''">
                 #{password, jdbcType=VARCHAR},
@@ -34,5 +34,16 @@
             </if>
         </trim>
     </insert>
+    <select id="findUsersByLoginPhone" parameterType="java.lang.String" resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO" >
+		select * from gsq_fourm_user
+		where login_phone=#{loginPhone}
+	</select>
+    <update id="modifyPasswordByLoginPhone" parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO">
+        update
+        gsq_fourm_user
+        set login_password = #{loginPassword}
+        where login_phone = #{loginPhone}
+    </update>
+
 
 </mapper>
