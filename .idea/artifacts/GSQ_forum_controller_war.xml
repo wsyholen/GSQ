@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GSQ-forum-controller:war">
+    <output-path>$PROJECT_DIR$/GSQ-forum-controller/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>GSQ-forum-controller</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="GSQ-forum-controller.war">
+      <element id="artifact" artifact-name="GSQ-forum-controller:war exploded" />
+    </root>
+  </artifact>
+</component>

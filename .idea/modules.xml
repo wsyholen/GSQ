@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GSQ-forum-common/GSQ-forum-common.iml" filepath="$PROJECT_DIR$/GSQ-forum-common/GSQ-forum-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GSQ-forum-controller/GSQ-forum-controller.iml" filepath="$PROJECT_DIR$/GSQ-forum-controller/GSQ-forum-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GSQ-forum-dao/GSQ-forum-dao.iml" filepath="$PROJECT_DIR$/GSQ-forum-dao/GSQ-forum-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GSQ-forum-service/GSQ-forum-service.iml" filepath="$PROJECT_DIR$/GSQ-forum-service/GSQ-forum-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GSQ-fourm.iml" filepath="$PROJECT_DIR$/GSQ-fourm.iml" />
+    </modules>
+  </component>
+</project>

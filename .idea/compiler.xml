@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="GSQ-forum-common" />
+        <module name="GSQ-forum-controller" />
+        <module name="GSQ-forum-dao" />
+        <module name="GSQ-forum-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="GSQ-forum-common" target="1.7" />
+      <module name="GSQ-forum-controller" target="1.7" />
+      <module name="GSQ-forum-dao" target="1.7" />
+      <module name="GSQ-forum-service" target="1.7" />
+      <module name="GSQ-fourm" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
