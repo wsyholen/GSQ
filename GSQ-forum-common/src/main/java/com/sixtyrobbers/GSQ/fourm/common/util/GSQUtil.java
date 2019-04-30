@@ -13,27 +13,29 @@ import java.util.Map;
  */
 public class GSQUtil {
     private static final Logger logger = LoggerFactory.getLogger(GSQUtil.class);
+
     /**
      * 判断dto是否为空
+     *
      * @return
      */
-    public static boolean isBeanEmpty(Object object){
+    public static boolean isBeanEmpty(Object object) {
         Boolean flag = Boolean.TRUE;
-        if (object == null){
+        if (object == null) {
             return flag;
         }
         Method[] methods = object.getClass().getMethods();
-        if (methods != null){
-            for (int i = 0;i<methods.length;i++){
+        if (methods != null) {
+            for (int i = 0; i < methods.length; i++) {
                 Method method = methods[i];
-                if (method.getName().startsWith("get") && !method.getName().equals("getClass")){
-                    try{
-                        Object resultObj = method.invoke(object,null);
-                        if (resultObj != null){
+                if (method.getName().startsWith("get") && !method.getName().equals("getClass")) {
+                    try {
+                        Object resultObj = method.invoke(object, null);
+                        if (resultObj != null) {
                             flag = false;
                         }
-                    }catch (Exception e){
-                        logger.error(e.getMessage(),e);
+                    } catch (Exception e) {
+                        logger.error(e.getMessage(), e);
                     }
                 }
             }
@@ -45,8 +47,7 @@ public class GSQUtil {
      * 检测指定对象是否为null或者空字符串 如果对象为null或空字符串则返回true，否则返回false
      *
      * @param value
-     * @param trim
-     *            可选参数，当value为String类型时，是否调用trim后再判断其长度
+     * @param trim  可选参数，当value为String类型时，是否调用trim后再判断其长度
      * @return
      */
     public static boolean isNullOrEmpty(Object value, boolean trim) {
@@ -61,14 +62,14 @@ public class GSQUtil {
             if (s.length() == 0) {
                 return true;
             }
-        }else if(value instanceof Map){
+        } else if (value instanceof Map) {
             Map map = (Map) value;
-            if(map.isEmpty()){
+            if (map.isEmpty()) {
                 return true;
             }
-        }else if(value instanceof String[]){
+        } else if (value instanceof String[]) {
             String[] s = (String[]) value;
-            if(s.length == 0){
+            if (s.length == 0) {
                 return true;
             }
         }
