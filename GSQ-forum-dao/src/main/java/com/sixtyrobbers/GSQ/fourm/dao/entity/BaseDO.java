@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.dao.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
+@Data
 public class BaseDO implements Serializable {
 
     private static final long serialVersionUID = 3397019294270724382L;
@@ -29,27 +32,4 @@ public class BaseDO implements Serializable {
      */
     private int validFlag;
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public int getValidFlag() {
-        return validFlag;
-    }
-
-    public void setValidFlag(int validFlag) {
-        this.validFlag = validFlag;
-    }
 }

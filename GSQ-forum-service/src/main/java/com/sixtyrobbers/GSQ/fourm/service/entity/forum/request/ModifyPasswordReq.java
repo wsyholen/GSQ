@@ -1,5 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,7 @@ import java.io.Serializable;
  * @CreateDate:     2019/4/28 18:48
  * @Version:        1.0
  */
-@Getter
-@Setter
+@Data
 public class ModifyPasswordReq implements Serializable {
 
     private static final long serialVersionUID = 4157359361431469769L;

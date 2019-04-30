@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,8 +18,7 @@ import java.util.Date;
  * @Date 2019-04-25 
  */
 
-@Setter
-@Getter
+@Data
 @ToString
 @Entity
 @Table ( name ="gsq_fourm_user" )

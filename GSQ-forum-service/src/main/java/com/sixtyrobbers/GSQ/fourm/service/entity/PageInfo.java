@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
  * Version: V1.0
  * </pre>
  */
+@Data
 public class PageInfo<T> implements Serializable {
 
     private static final long serialVersionUID = 7698590339210569253L;
@@ -64,43 +67,4 @@ public class PageInfo<T> implements Serializable {
         return result;
     }
 
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public long getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(long totalCount) {
-        this.totalCount = totalCount;
-    }
-
-    public int getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
 }

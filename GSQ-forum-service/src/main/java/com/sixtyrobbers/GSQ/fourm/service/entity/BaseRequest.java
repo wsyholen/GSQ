@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
+@Data
 public class BaseRequest implements Serializable {
 
     private static final long serialVersionUID = 5419631781407324063L;
@@ -39,43 +42,4 @@ public class BaseRequest implements Serializable {
      */
     private String keyWords;
 
-    public String getKeyWords() {
-        return keyWords;
-    }
-
-    public void setKeyWords(String keyWords) {
-        this.keyWords = keyWords;
-    }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEntTime() {
-        return entTime;
-    }
-
-    public void setEntTime(String entTime) {
-        this.entTime = entTime;
-    }
 }

@@ -1,7 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 
 import java.io.Serializable;
 
@@ -13,8 +13,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
-@Getter
-@Setter
+@Data
 public class LoginParam implements Serializable {
 
     private static long serialVersionUID = 164439979081473616L;

@@ -1,5 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
-@Getter
-@Setter
+@Data
 public class LoginDTO implements Serializable {
 
     private static long serialVersionUID = -6176059697669620415L;

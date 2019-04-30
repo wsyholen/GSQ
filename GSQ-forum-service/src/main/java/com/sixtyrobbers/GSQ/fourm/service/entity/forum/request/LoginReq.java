@@ -1,5 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
-@Getter
-@Setter
+@Data
 public class LoginReq implements Serializable {
 
     private static final long serialVersionUID = -1789573111898968288L;

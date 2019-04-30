@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.controller.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
+@Data
 public class BaseResult implements Serializable {
 
     private static final long serialVersionUID = 1291648895477517393L;
@@ -29,35 +32,4 @@ public class BaseResult implements Serializable {
         this.data = data;
     }
 
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 }

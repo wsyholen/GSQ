@@ -3,7 +3,6 @@ package com.sixtyrobbers.GSQ.fourm.service.entity.forum.response;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 
 /**

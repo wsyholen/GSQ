@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ import java.io.Serializable;
  * Version: V1.0
  * </pre>
  */
+@Data
 public class BaseResponse implements Serializable {
 
     private static final long serialVersionUID = 4772764374402702168L;
@@ -29,27 +32,4 @@ public class BaseResponse implements Serializable {
      */
     private String validFlag;
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getValidFlag() {
-        return validFlag;
-    }
-
-    public void setValidFlag(String validFlag) {
-        this.validFlag = validFlag;
-    }
 }
