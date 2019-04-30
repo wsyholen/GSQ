@@ -2,8 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sixtyrobbers.GSQ.fourm.dao.forum.LoginDAO">
 
+    <resultMap id="baseMap" type="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dto.LoginDTO">
+        <result property="userId" column="user_id"></result>
+        <result property="loginPhone" column="login_phone"></result>
+        <result property="loginEmail" column="login_email"></result>
+        <result property="backUrl" column="backUrl"></result>
+        <result property="imagUrl" column="imagUrl"></result>
+        <result property="userName" column="user_name"></result>
+        <result property="userSex" column="user_sex"></result>
+        <result property="userIntroduce" column="user_introduce"></result>
+        <result property="userHobby" column="user_hobby"></result>
+        <result property="userOccupation" column="user_occupation"></result>
+    </resultMap>
+
     <select id="login" parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.LoginParam"
-            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dto.LoginDTO">
+            resultMap="baseMap">
         SELECT
 	      gfu.user_id,
 	      gfu.login_phone,
