@@ -49,7 +49,7 @@ public class JurisdictionController {
     @ResponseBody
     public BaseResult getJurisdictionByRoleId(JurisdictionReq JurisdictionReq) {
         if (JurisdictionReq.getRoleId() == null || JurisdictionReq.getRoleId() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ROLE_ISNULL.getCode(), ResponseCodeEnum.ERROR_CODE_ROLE_ISNULL.getValue(), "角色不能为空!");
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "角色不能为空!");
         }
         Map<String, Object> result = new HashMap<>();
         try {
@@ -74,10 +74,10 @@ public class JurisdictionController {
     @ResponseBody
     public BaseResult updateJurisdictionByRoleId(@RequestBody JurisdictionReq JurisdictionReq) {
         if (JurisdictionReq.getRoleId() == null || JurisdictionReq.getRoleId() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ROLE_ISNULL.getCode(), ResponseCodeEnum.ERROR_CODE_ROLE_ISNULL.getValue(), "角色不能为空!");
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "角色不能为空!");
         }
         if (JurisdictionReq.getMenuDOList().size() == 0) {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MENU_ISNULL.getCode(), ResponseCodeEnum.ERROR_CODE_MENU_ISNULL.getValue(), "菜单不能为空!");
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "菜单不能为空!");
         }
         try {
             jurisdictionService.updateJurisdictionByRoleId(JurisdictionReq);

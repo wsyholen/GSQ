@@ -66,31 +66,25 @@ public enum ResponseCodeEnum {
     ERROR_CODE_REGISTER_SUCCESS("1010","注册成功！"),
 
     /**
-     * 角色不能为空
-     */
-    ERROR_CODE_ROLE_ISNULL("1011","角色不能为空！"),
-
-    /**
-     * 角色不能为空
-     */
-    ERROR_CODE_MENU_ISNULL("1012","菜单不能为空！"),
-
-    /**
      * 修改密码成功
      */
     ERROR_CODE_MODIFY_SUCCESS("2010","修改密码成功！"),
+
     /**
      * 修改密码错误
      */
     ERROR_CODE_MODIFY_ERRORS("2011","修改密码失败！"),
+
     /**
      * 重新输入的新密码与第一次不一致
      */
     ERROR_CODE_MODIFY_ERROR("2012","两次密码输入不同！"),
+
     /**
      * 手机号或密码有误
      */
     ERROR_CODE_PHONE_PASSWORD_ERROR("2013","手机号或密码有误！");
+
     private String code;
 
     private String value;
