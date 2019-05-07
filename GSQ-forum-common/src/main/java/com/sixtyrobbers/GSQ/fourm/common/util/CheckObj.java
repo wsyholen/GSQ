@@ -1,6 +1,8 @@
 package com.sixtyrobbers.GSQ.fourm.common.util;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <pre>
@@ -33,6 +35,36 @@ public class CheckObj {
         return flag;
     }
 
+    /**
+     * <pre>
+     * Explain: 判断对象里面属性是否为空并返回结果
+     * Author: holennnnnn_
+     * Create_Time: 2019/5/7 16:25
+     * Version: V1.0
+     * </pre>
+     */
+    public static String checkObjIsNull(Object object) throws IllegalAccessException {
+        List<String> result = new ArrayList<>();
+        for (Field field : object.getClass().getDeclaredFields()) {
+            //取消Java的权限控制检查
+            field.setAccessible(true);
+            if (field.get(object) == null) {
+                result.add(field.getName());
+            }
+        }
+        if (result.size() != 0) {
+            String str = null;
+            for (int i = 0; i < result.size(); i++) {
+                if (str == null) {
+                    str = result.get(i);
+                } else {
+                    str = str + "、" + result.get(i);
+                }
+            }
+            return "参数：" + str + "不能为空！";
+        }
+        return null;
+    }
 
 
 }
