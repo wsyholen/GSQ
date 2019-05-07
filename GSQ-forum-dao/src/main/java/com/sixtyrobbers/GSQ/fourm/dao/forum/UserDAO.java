@@ -1,6 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.dao.forum;
 
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO;
+import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForgetPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.RegisterParam;
 
@@ -25,13 +26,12 @@ public interface UserDAO {
     void addUser(RegisterParam registerParam);
 
     /**
-     * @Description:    查找用户手机号
+     * @Description:    修改密码查找用户手机号
      * @Author:         luoheng
      * @CreateDate:     2019/4/29 18:41
      * @Version:        1.0
      */
      UserDO findUsersByLoginPhone(ModifyPasswordParam modifyPasswordParam);
-
     /**
      * @Description:    修改密码
      * @Author:         luoheng
@@ -39,4 +39,19 @@ public interface UserDAO {
      * @Version:        1.0
      */
      int modifyPasswordByLoginPhone(ModifyPasswordParam modifyPasswordParam);
+    /**
+     * @Description:    忘记密码查找手机号
+     * @Author:         luoheng
+     * @CreateDate:     2019/5/6 21:06
+     * @Version:        1.0
+     */
+    UserDO forgetFindUsersByLoginPhone(ForgetPasswordParam forgetPasswordParam);
+    /**
+     * @Description:    忘记密码
+     * @Author:         luoheng
+     * @CreateDate:     2019/5/6 21:08
+     * @Version:        1.0
+     */
+    int forgetPasswordByLoginPhone(ForgetPasswordParam forgetPasswordParam);
+
 }

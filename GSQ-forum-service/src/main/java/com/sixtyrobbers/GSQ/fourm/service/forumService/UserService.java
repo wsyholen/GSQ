@@ -1,5 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ForgetPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 
@@ -30,4 +31,12 @@ public interface UserService {
     * @Version:        1.0
     */
     String modifyPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq);
+
+    /**
+     * @Description:    忘记密码
+     * @Author:         luoheng
+     * @CreateDate:     2019/5/5 21:37
+     * @Version:        1.0
+     */
+    String forgetPasswordByLoginPhone(ForgetPasswordReq forgetPasswordReq);
 }

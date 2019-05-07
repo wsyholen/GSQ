@@ -50,8 +50,31 @@
         </if>
         and valid_flag = 0
     </select>
+    <select id="forgetFindUsersByLoginPhone"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForgetPasswordParam"
+            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO">
+        select *
+        from gsq_fourm_user
+        where
+        1=1
+        <if test="loginPhone != null and loginPhone != ''">
+            and login_phone = #{loginPhone,jdbcType=VARCHAR}
+        </if>
+        and valid_flag = 0
+    </select>
     <update id="modifyPasswordByLoginPhone"
             parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam">
+        update gsq_fourm_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="newPassword != null and newPassword != ''">
+                login_password = #{newPassword},
+            </if>
+        </trim>
+        WHERE login_phone = #{loginPhone}
+        and valid_flag = 0
+    </update>
+    <update id="forgetPasswordByLoginPhone"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForgetPasswordParam">
         update gsq_fourm_user
         <trim prefix="set" suffixOverrides=",">
             <if test="newPassword != null and newPassword != ''">

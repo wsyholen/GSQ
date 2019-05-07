@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
 import com.sixtyrobbers.GSQ.fourm.common.util.oid.OIDGennerator;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO;
+import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForgetPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.RegisterParam;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.UserDAO;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ForgetPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.UserService;
@@ -60,6 +62,26 @@ public class UserServiceImpl implements UserService {
         int result = userDAO.modifyPasswordByLoginPhone(modifyPasswordParam);
         return String.valueOf(result);
     }
+
+    /**
+     * @Description:    忘记密码
+     * @Author:         luoheng
+     * @CreateDate:     2019/5/5 21:40
+     * @Version:        1.0
+     */
+    @Override
+    public  String forgetPasswordByLoginPhone(ForgetPasswordReq forgetPasswordReq){
+        ForgetPasswordParam forgetPasswordParam = JSON.parseObject(JSON.toJSONString(forgetPasswordReq),ForgetPasswordParam.class);
+        UserDO userDO = userDAO.forgetFindUsersByLoginPhone(forgetPasswordParam);
+        if (userDO == null){
+            return "请确定手机号是否正确!";
+        }
+        int result = userDAO.forgetPasswordByLoginPhone(forgetPasswordParam);
+        return String.valueOf(result);
+    }
+
+
+
 
 
 }
