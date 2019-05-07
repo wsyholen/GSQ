@@ -66,6 +66,16 @@ public enum ResponseCodeEnum {
     ERROR_CODE_REGISTER_SUCCESS("1010","注册成功！"),
 
     /**
+     * 角色不能为空
+     */
+    ERROR_CODE_ROLE_ISNULL("1011","角色不能为空！"),
+
+    /**
+     * 角色不能为空
+     */
+    ERROR_CODE_MENU_ISNULL("1012","菜单不能为空！"),
+
+    /**
      * 修改密码成功
      */
     ERROR_CODE_MODIFY_SUCCESS("2010","修改密码成功！"),

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.sixtyrobbers.GSQ.fourm.dao.forum.JurisdictionDAO">
+
+    <select id="getJurisdictionByRoleId"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.JurisdictionParam"
+            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.MenuDO">
+        SELECT
+			gfm.menu_name,
+			gfm.menu_url,
+			gfm.node_numer,
+			gfm.parent
+		FROM
+			gsq_forum_role_menu gfrm,
+			gsq_forum_menu gfm
+		WHERE
+			role_id = #{roleId}
+			AND gfrm.menu_node_numer = gfm.node_numer
+
+    </select>
+
+    <delete id="deleteJurisdictionByRoleId"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.JurisdictionParam">
+        DELETE FROM gsq_forum_role_menu WHERE role_id = #{roleId}
+	</delete>
+
+    <insert id="addJurisdiction" parameterType="java.util.List">
+        INSERT INTO gsq_forum_role_menu
+        (role_id,
+        menu_node_numer)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            ( #{item.roleId},
+            #{item.menuNodeNumer})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,8 +1,10 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
 
+import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.MenuDO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <pre>
@@ -21,5 +23,7 @@ public class JurisdictionReq implements Serializable {
      * 角色id
      */
     private String roleId;
+
+    private List<MenuDO> menuDOList;
 
 }
