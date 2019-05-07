@@ -1,6 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService.forumServiceImpl;
 
 import com.alibaba.fastjson.JSON;
+import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.MenuDO;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.RoleMenuDO;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.JurisdictionParam;
@@ -12,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,28 +43,49 @@ public class JurisdictionServiceImpl implements JurisdictionService {
     @Override
     public List<JurisdictionRes> getJurisdictionByRoleId(JurisdictionReq JurisdictionReq) {
         JurisdictionParam jurisdictionParam = JSON.parseObject(JSON.toJSONString(JurisdictionReq), JurisdictionParam.class);
+        //查询全部菜单
+        List<MenuDO> allMenuList = jurisdictionDAO.getJurisdictionByRoleId(null);
+        //查询该角色菜单
         List<MenuDO> menuDOList = jurisdictionDAO.getJurisdictionByRoleId(jurisdictionParam);
+        String [] nodeNumer = new String[0];
+        //把该角色的节点存到数组内
+        for (MenuDO menuDO : menuDOList) {
+             nodeNumer = CheckObj.addArray(nodeNumer,menuDO.getNodeNumer());
+        }
         List<MenuDO> sonMenuList = new ArrayList<>();
-        for (MenuDO menu : menuDOList) {
+        //筛选出子节点
+        for (MenuDO menu : allMenuList) {
             if (menu.getParent() == 1) {
                 sonMenuList.add(menu);
             }
         }
-        menuDOList.removeAll(sonMenuList);
+        //筛选出父类
+        allMenuList.removeAll(sonMenuList);
         List<JurisdictionRes> jurisdictionResList = new ArrayList<>();
-        JurisdictionRes jurisdictionRes = new JurisdictionRes();
-        for (MenuDO menu : menuDOList) {
+        JurisdictionRes jurisdictionRes = null;
+        for (MenuDO menu : allMenuList) {
             List<JurisdictionRes> jurisdictionResSonList = new ArrayList<>();
+            //判断该角色有没有该菜单
+            boolean result = CheckObj.checkArray(nodeNumer,menu.getNodeNumer());
+            //筛选出子类的父类
             for (MenuDO menuDO : sonMenuList) {
-                String parent = menu.getNodeNumer().substring(0,1);
-                String son = menuDO.getNodeNumer().substring(0,1);
-                if (parent.equals(son)){
+                String parent = menu.getNodeNumer().substring(0, 1);
+                String son = menuDO.getNodeNumer().substring(0, 1);
+                if (parent.equals(son)) {
+                    //判断该角色有没有该菜单
+                    boolean sonResult = CheckObj.checkArray(nodeNumer,menuDO.getNodeNumer());
                     jurisdictionRes = JSON.parseObject(JSON.toJSONString(menuDO), JurisdictionRes.class);
+                    if (sonResult){
+                        jurisdictionRes.setFlag(0);
+                    }
                     jurisdictionResSonList.add(jurisdictionRes);
                 }
             }
             jurisdictionRes = JSON.parseObject(JSON.toJSONString(menu), JurisdictionRes.class);
-            if (jurisdictionResSonList.size() > 0){
+            if (result){
+                jurisdictionRes.setFlag(0);
+            }
+            if (jurisdictionResSonList.size() > 0) {
                 jurisdictionRes.setJurisdictionResList(jurisdictionResSonList);
             }
             jurisdictionResList.add(jurisdictionRes);
@@ -84,7 +108,7 @@ public class JurisdictionServiceImpl implements JurisdictionService {
         jurisdictionDAO.deleteJurisdictionByRoleId(jurisdictionParam);
         List<RoleMenuDO> roleMenuDOList = new ArrayList<>();
         RoleMenuDO roleMenuDO = new RoleMenuDO();
-        for (MenuDO menuDO: JurisdictionReq.getMenuDOList()) {
+        for (MenuDO menuDO : JurisdictionReq.getMenuDOList()) {
             roleMenuDO.setRoleId(JurisdictionReq.getRoleId());
             roleMenuDO.setMenuNodeNumer(menuDO.getNodeNumer());
             roleMenuDOList.add(roleMenuDO);

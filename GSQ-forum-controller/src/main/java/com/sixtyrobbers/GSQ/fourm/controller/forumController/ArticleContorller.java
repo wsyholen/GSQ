@@ -1,7 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.sixtyrobbers.GSQ.fourm.common.util.GSQUtil;
-import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ArticleReq;
 import org.springframework.web.bind.annotation.RequestBody;

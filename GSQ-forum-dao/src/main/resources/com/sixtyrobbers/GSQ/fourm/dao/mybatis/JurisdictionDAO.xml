@@ -13,12 +13,16 @@
 			gfm.node_numer,
 			gfm.parent
 		FROM
+        <if test="roleId !=null and roleId != ''">
 			gsq_forum_role_menu gfrm,
+        </if>
 			gsq_forum_menu gfm
 		WHERE
-			role_id = #{roleId}
+		1=1
+        <if test="roleId !=null and roleId != ''">
+			AND role_id = #{roleId}
 			AND gfrm.menu_node_numer = gfm.node_numer
-
+        </if>
     </select>
 
     <delete id="deleteJurisdictionByRoleId"

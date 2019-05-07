@@ -1,9 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 /**

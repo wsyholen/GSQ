@@ -1,9 +1,12 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.JurisdictionReq;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.JurisdictionRes;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.JurisdictionService;
 import org.slf4j.Logger;

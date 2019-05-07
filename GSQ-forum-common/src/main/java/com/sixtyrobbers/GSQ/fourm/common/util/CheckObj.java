@@ -43,13 +43,23 @@ public class CheckObj {
      * Version: V1.0
      * </pre>
      */
-    public static String checkObjIsNull(Object object) throws IllegalAccessException {
+    public static String checkObjIsNull(Object object,String [] arr) throws IllegalAccessException {
         List<String> result = new ArrayList<>();
         for (Field field : object.getClass().getDeclaredFields()) {
             //取消Java的权限控制检查
             field.setAccessible(true);
-            if (field.get(object) == null) {
-                result.add(field.getName());
+            if (arr != null){
+                for (String res: arr) {
+                    if (field.getName().equals(res)){
+                        if (field.get(object) == null) {
+                            result.add(field.getName());
+                        }
+                    }
+                }
+            }else {
+                if (field.get(object) == null) {
+                    result.add(field.getName());
+                }
             }
         }
         if (result.size() != 0) {
@@ -64,6 +74,22 @@ public class CheckObj {
             return "参数：" + str + "不能为空！";
         }
         return null;
+    }
+
+    public static String[] addArray(String [] arr,String param){
+        String [] result = new String [arr.length+1];
+        System.arraycopy(arr,0,result,0,arr.length);
+        result[result.length-1] = param;
+        return result;
+    }
+
+    public static boolean checkArray(String [] arr,String param){
+        for (String s : arr) {
+            if (s.equals(param)){
+                return true;
+            }
+        }
+        return false;
     }
 
 

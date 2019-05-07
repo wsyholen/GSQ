@@ -33,6 +33,11 @@ public class JurisdictionRes implements Serializable {
      */
     private String nodeNumer;
 
+    /**
+     * 是否存在
+     */
+    private Integer flag = 1;
+
     private List<JurisdictionRes> jurisdictionResList;
 
 
