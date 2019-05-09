@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param;
 
+import lombok.Data;
+
 import java.io.Serializable;
 /**
  * @Description:    java类作用描述
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * @CreateDate:     2019/5/5 21:52
  * @Version:        1.0
  */
-
+@Data
 public class ForgetPasswordParam implements Serializable {
 
     private static final long serialVersionUID = 6314185502066066995L;

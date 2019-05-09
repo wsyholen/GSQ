@@ -107,8 +107,8 @@ public class JurisdictionServiceImpl implements JurisdictionService {
         JurisdictionParam jurisdictionParam = JSON.parseObject(JSON.toJSONString(JurisdictionReq), JurisdictionParam.class);
         jurisdictionDAO.deleteJurisdictionByRoleId(jurisdictionParam);
         List<RoleMenuDO> roleMenuDOList = new ArrayList<>();
-        RoleMenuDO roleMenuDO = new RoleMenuDO();
         for (MenuDO menuDO : JurisdictionReq.getMenuDOList()) {
+            RoleMenuDO roleMenuDO = new RoleMenuDO();
             roleMenuDO.setRoleId(JurisdictionReq.getRoleId());
             roleMenuDO.setMenuNodeNumer(menuDO.getNodeNumer());
             roleMenuDOList.add(roleMenuDO);

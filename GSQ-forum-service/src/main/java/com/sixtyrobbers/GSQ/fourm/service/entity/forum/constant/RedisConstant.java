@@ -12,4 +12,6 @@ public interface RedisConstant {
 
     String USER_VERIFY_CODE="LOGIN:VERIFYCODE:";
 
+    String REGISTER_VERIFY_CODE="REGISTER:VERIFYCODE:";
+
 }

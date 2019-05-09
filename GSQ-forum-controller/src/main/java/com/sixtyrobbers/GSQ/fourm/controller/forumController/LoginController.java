@@ -1,6 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
 import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
@@ -49,7 +50,7 @@ public class LoginController {
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
 
-    @Value("120")
+    @Value("${redis.valid.minute}")
     private int validMinute;
 
     @Value("${redis.valid.second}")
@@ -98,17 +99,15 @@ public class LoginController {
     @RequestMapping(value = "/V1.0/modifyPasswoed", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult modifyPassword(@RequestBody ModifyPasswordReq modifyPasswordReq) {
-        if (modifyPasswordReq.getLoginPhone() == null || modifyPasswordReq.getLoginPhone() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "账号不能为空!");
+        String success = null;
+        try {
+            String param[] = {"loginPhone","loginPassword","newPassword","secondPassword"};
+            success = CheckObj.checkObjIsNull(modifyPasswordReq,param);
+        } catch (IllegalAccessException e) {
+            logger.error("修改密码--判断参数为空异常，param:{},error:{}", JSONObject.toJSONString(modifyPasswordReq), e.getMessage());
         }
-        if (modifyPasswordReq.getLoginPassword() == null || modifyPasswordReq.getLoginPassword() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "密码不能为空！");
-        }
-        if (modifyPasswordReq.getNewPassword() == null || modifyPasswordReq.getNewPassword() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "新密码不能为空!");
-        }
-        if (modifyPasswordReq.getSecondPassword() == null || modifyPasswordReq.getSecondPassword() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "重新输入新密码不能为空!");
+        if (success != null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), success);
         }
         if (!modifyPasswordReq.getNewPassword().equals(modifyPasswordReq.getSecondPassword())) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getValue(), "重新输入的新密码与第一次不一致!");
@@ -138,22 +137,19 @@ public class LoginController {
    @RequestMapping(value = "/V1.0/forgetPassword", method = RequestMethod.POST)
    @ResponseBody
    public BaseResult forgetPassword(@RequestBody ForgetPasswordReq forgetPasswordReq) {
-       if (forgetPasswordReq.getLoginPhone() == null || forgetPasswordReq.getLoginPhone() == "") {
-           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "手机号不能为空!");
+       String success = null;
+       try {
+           success = CheckObj.checkObjIsNull(forgetPasswordReq,null);
+       } catch (IllegalAccessException e) {
+           logger.error("忘记密码--判断参数为空异常，param:{},error:{}", JSONObject.toJSONString(forgetPasswordReq), e.getMessage());
        }
-       if (forgetPasswordReq.getVerificationCode() == null || forgetPasswordReq.getVerificationCode() == "") {
-           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "验证码不能为空!");
-       }
-       if (forgetPasswordReq.getNewPassword() == null || forgetPasswordReq.getNewPassword() == "") {
-           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "新密码不能为空!");
-       }
-       if (forgetPasswordReq.getSecondPassword() == null || forgetPasswordReq.getSecondPassword() == "") {
-           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "重新输入新密码不能为空!");
+       if (success != null) {
+           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), success);
        }
        if (!forgetPasswordReq.getNewPassword().equals(forgetPasswordReq.getSecondPassword())) {
            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getValue(), "重新输入的新密码与第一次不一致!");
        }
-       String tempVerifyCode = (String) redisTemplate.opsForValue().get(RedisConstant.USER_VERIFY_CODE + forgetPasswordReq.getLoginPhone());
+       String tempVerifyCode = (String) redisTemplate.opsForValue().get(RedisConstant.REGISTER_VERIFY_CODE + forgetPasswordReq.getLoginPhone());
        if (tempVerifyCode == null) {
            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_DUE.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_DUE.getValue(), "验证码过期，请重新获取！");
        }
@@ -162,8 +158,7 @@ public class LoginController {
        } else {
            String result = null;
            try {
-               //redisTemplate.delete(RedisConstant.USER_VERIFY_CODE + forgetPasswordReq.getLoginPhone());
-
+               redisTemplate.delete(RedisConstant.REGISTER_VERIFY_CODE + forgetPasswordReq.getLoginPhone());
                result = userService.forgetPasswordByLoginPhone(forgetPasswordReq);
                if (result.equals("1")){
                    return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "修改密码成功！");
@@ -180,13 +175,6 @@ public class LoginController {
        }
 
    }
-
-
-
-
-
-
-
 
     /**
      * <pre>
@@ -209,7 +197,7 @@ public class LoginController {
             if (result.equals("发送失败！") || result == "") {
                 return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_SEND_MESSAGE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_SEND_MESSAGE_ERROR.getValue(), "短信发送失败！");
             } else {
-                redisTemplate.opsForValue().set(RedisConstant.USER_VERIFY_CODE + loginReq.getAccount(), code, validSecond, TimeUnit.SECONDS);
+                redisTemplate.opsForValue().set(RedisConstant.REGISTER_VERIFY_CODE + loginReq.getAccount(), code, validSecond, TimeUnit.SECONDS);
                 return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SEND_MESSAGE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SEND_MESSAGE_SUCCESS.getValue(), "短信发送成功," + validMinute + "分钟内有效！");
             }
         } catch (Exception e) {
@@ -235,7 +223,7 @@ public class LoginController {
         if (registerReq.getVerificationCode() == null || registerReq.getVerificationCode() == "") {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "验证码不能为空!");
         }
-        String tempVerifyCode = (String) redisTemplate.opsForValue().get(RedisConstant.USER_VERIFY_CODE + registerReq.getAccount());
+        String tempVerifyCode = (String) redisTemplate.opsForValue().get(RedisConstant.REGISTER_VERIFY_CODE + registerReq.getAccount());
         if (tempVerifyCode == null) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_DUE.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_DUE.getValue(), "验证码过期，请重新获取！");
         }
@@ -243,7 +231,7 @@ public class LoginController {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_ERROR.getValue(), "验证码错误，请重新输入！");
         } else {
             try {
-                redisTemplate.delete(RedisConstant.USER_VERIFY_CODE + registerReq.getAccount());
+                redisTemplate.delete(RedisConstant.REGISTER_VERIFY_CODE + registerReq.getAccount());
                 userService.addUser(registerReq);
                 return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_REGISTER_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_REGISTER_SUCCESS.getValue(), "注册成功！");
             } catch (Exception e) {
