@@ -19,6 +19,10 @@ public class ModifyPasswordParam implements Serializable {
      * 密码
      */
     private String loginPassword;
+    /**
+     * 验证码
+     */
+    private String verificationCode;
 
     /**
      * 新密码
