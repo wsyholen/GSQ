@@ -21,7 +21,6 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
         ModelAndView mv = new ModelAndView();
-
         httpServletResponse.setStatus(HttpStatus.OK.value());
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
         httpServletResponse.setCharacterEncoding("UTF-8");
@@ -29,7 +28,6 @@ public class ExceptionHandler implements HandlerExceptionResolver {
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Cache-Control");
         httpServletResponse.setContentType("text/json;charset=utf-8");
-
         try {
             httpServletResponse.getWriter().write("errMsg:" + e.toString());
         } catch (IOException e1) {

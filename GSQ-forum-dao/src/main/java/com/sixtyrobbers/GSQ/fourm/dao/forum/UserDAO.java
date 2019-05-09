@@ -4,6 +4,7 @@ import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForgetPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.RegisterParam;
+import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserParam;
 
 /**
  * <pre>
@@ -24,6 +25,16 @@ public interface UserDAO {
      * </pre>
      */
     void addUser(RegisterParam registerParam);
+
+    /**
+     * <pre>
+     * Explain: 查询用户(入参可选：手机号、密码)
+     * Author: holennnnnn_
+     * Create_Time: 2019/5/9 14:30
+     * Version: V1.0
+     * </pre>
+     */
+    UserDO getUser(UserParam userParam);
 
     /**
      * @Description:    修改密码查找用户手机号

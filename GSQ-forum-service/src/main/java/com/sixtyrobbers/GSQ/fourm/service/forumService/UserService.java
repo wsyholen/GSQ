@@ -3,6 +3,8 @@ package com.sixtyrobbers.GSQ.fourm.service.forumService;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ForgetPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.UserReq;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
  * <pre>
@@ -24,19 +26,29 @@ public interface UserService {
      */
     void addUser(RegisterReq registerReq);
 
-   /**
-    * @Description:    修改密码
-    * @Author:         luoheng
-    * @CreateDate:     2019/4/29 19:14
-    * @Version:        1.0
-    */
+    /**
+     * @Description: 修改密码
+     * @Author: luoheng
+     * @CreateDate: 2019/4/29 19:14
+     * @Version: 1.0
+     */
     String modifyPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq);
 
     /**
-     * @Description:    忘记密码
-     * @Author:         luoheng
-     * @CreateDate:     2019/5/5 21:37
-     * @Version:        1.0
+     * @Description: 忘记密码
+     * @Author: luoheng
+     * @CreateDate: 2019/5/5 21:37
+     * @Version: 1.0
      */
     String forgetPasswordByLoginPhone(ForgetPasswordReq forgetPasswordReq);
+
+    /**
+     * <pre>
+     * Explain: 修改背景图片
+     * Author: holennnnnn_
+     * Create_Time: 2019/5/9 14:24
+     * Version: V1.0
+     * </pre>
+     */
+    String updateBackGround(CommonsMultipartFile[] background, UserReq userReq);
 }

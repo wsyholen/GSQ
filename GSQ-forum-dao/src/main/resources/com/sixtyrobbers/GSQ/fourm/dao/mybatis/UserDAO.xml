@@ -35,6 +35,22 @@
         </trim>
     </insert>
 
+    <select id="getUser"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserParam"
+            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO">
+        select *
+        from gsq_fourm_user
+        where
+        1=1
+        <if test="loginPhone != null and loginPhone != ''">
+            and login_phone = #{loginPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="loginPassword != null and loginPassword != ''">
+            and login_password = #{loginPassword, jdbcType=VARCHAR}
+        </if>
+        and valid_flag = 0
+    </select>
+
     <select id="findUsersByLoginPhone"
             parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam"
             resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO">
@@ -50,6 +66,7 @@
         </if>
         and valid_flag = 0
     </select>
+
     <select id="forgetFindUsersByLoginPhone"
             parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForgetPasswordParam"
             resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO">
