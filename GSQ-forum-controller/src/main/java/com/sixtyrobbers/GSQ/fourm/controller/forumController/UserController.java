@@ -40,7 +40,7 @@ public class UserController {
      */
     @RequestMapping(value = "/V1.0/updateBackGround", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult updateBackGround(@RequestParam(value = "background", required = false) CommonsMultipartFile[] background, @RequestBody UserReq userReq){
+    public BaseResult updateBackGround(@RequestParam(value = "background") CommonsMultipartFile[] background, UserReq userReq){
         String flag = null;
         try {
             flag = CheckObj.checkObjIsNull(userReq,null);

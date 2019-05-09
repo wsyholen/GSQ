@@ -18,8 +18,8 @@ public class UserReq implements Serializable {
     private static final long serialVersionUID = 1624745017779852895L;
 
     /**
-     * 用户id
+     * 用户手机
      */
-    private String userId;
+    private String loginPhone;
 
 }
