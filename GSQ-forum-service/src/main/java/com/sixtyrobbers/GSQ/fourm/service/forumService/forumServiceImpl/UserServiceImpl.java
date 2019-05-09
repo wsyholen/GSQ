@@ -2,6 +2,7 @@ package com.sixtyrobbers.GSQ.fourm.service.forumService.forumServiceImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
+import com.sixtyrobbers.GSQ.fourm.common.util.UploadFileUtil;
 import com.sixtyrobbers.GSQ.fourm.common.util.oid.OIDGennerator;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
@@ -15,6 +16,8 @@ import com.sixtyrobbers.GSQ.fourm.service.forumService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.io.IOException;
 
 /**
  * <pre>
@@ -79,7 +82,11 @@ public class UserServiceImpl implements UserService {
         if (userDO == null){
             return "不存在该用户！";
         }
-
+        try {
+            Long re = UploadFileUtil.uploadFile(background);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

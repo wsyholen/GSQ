@@ -1,13 +1,11 @@
 package com.sixtyrobbers.GSQ.fourm.common.util;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,9 +19,9 @@ import java.util.Map;
  */
 public class UploadFileUtil {
 
-    @Value("${user.background.path}")
-    private static String userBackPath;
+    private static final String userBackPath = "D:/";
 
+    private static final String onlinePath = "D:/";
     /**
      * <pre>
      * Explain: 上传文件
@@ -54,18 +52,7 @@ public class UploadFileUtil {
             inputStream.close();
             fileOutputStream.close();
 
-            String imagePath = IMAGE_ONLINE_PATH + newFileName;
-            if (caseEntity == null) {
-                param.put("batch", batch);
-            } else {
-                if (caseEntity.getCaseImag() == null) {
-                    param.put("batch", batch);
-                } else {
-                    param.put("batch", caseEntity.getCaseImag());
-                }
-            }
-            param.put("imagPath", imagePath);
-            myBatisDAO.findForObject("addCaseImage", param);
+            String imagePath = onlinePath + newFileName;
         }
         Long result = (Long) param.get("batch");
         return result;
