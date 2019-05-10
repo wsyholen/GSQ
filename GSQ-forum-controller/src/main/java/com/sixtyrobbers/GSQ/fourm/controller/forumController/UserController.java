@@ -40,14 +40,9 @@ public class UserController {
      */
     @RequestMapping(value = "/V1.0/updateBackGround", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult updateBackGround(@RequestParam(value = "background") CommonsMultipartFile[] background, UserReq userReq){
+    public BaseResult updateBackGround(@RequestParam(value = "background") CommonsMultipartFile[] background, UserReq userReq) throws Exception{
         ServiceResult result = null;
-        try {
-            result = userService.updateBackGround(background, userReq);
-        }catch (Exception e){
-            logger.error("修改背景图片--业务异常，param:{},error:{}", JSONObject.toJSONString(userReq), e.getMessage());
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
-        }
+        result = userService.updateBackGround(background, userReq);
         if (result.getSuccess() == true){
             return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), result);
         }else {

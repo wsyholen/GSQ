@@ -11,6 +11,10 @@ package com.sixtyrobbers.GSQ.fourm.controller.entity;
 public enum ResponseCodeEnum {
 
     /**
+     * 系统异常
+     */
+    ERROR_CODE_SYS("0000","系统异常"),
+    /**
      * 请求成功时错误码、描述
      */
     ERROR_CODE_SUCCESS("1000", "请求成功！"),
