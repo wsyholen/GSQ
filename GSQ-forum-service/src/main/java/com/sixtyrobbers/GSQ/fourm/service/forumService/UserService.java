@@ -1,9 +1,12 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
+import com.sixtyrobbers.GSQ.fourm.service.entity.ServiceResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.UserReq;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.util.Map;
 
 /**
  * <pre>
@@ -41,5 +44,5 @@ public interface UserService {
      * Version: V1.0
      * </pre>
      */
-    String updateBackGround(CommonsMultipartFile[] background, UserReq userReq);
+    ServiceResult updateBackGround(CommonsMultipartFile[] background, UserReq userReq);
 }

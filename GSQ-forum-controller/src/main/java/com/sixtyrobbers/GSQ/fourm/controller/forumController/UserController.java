@@ -1,9 +1,9 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ServiceResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.UserReq;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.UserService;
 import org.slf4j.Logger;
@@ -41,22 +41,18 @@ public class UserController {
     @RequestMapping(value = "/V1.0/updateBackGround", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult updateBackGround(@RequestParam(value = "background") CommonsMultipartFile[] background, UserReq userReq){
-        String flag = null;
+        ServiceResult result = null;
         try {
-            flag = CheckObj.checkObjIsNull(userReq,null);
-        } catch (IllegalAccessException e) {
-            logger.error("修改背景图片--判断对象为空异常，param:{},error:{}", JSONObject.toJSONString(userReq), e.getMessage());
+            result = userService.updateBackGround(background, userReq);
+        }catch (Exception e){
+            logger.error("修改背景图片--业务异常，param:{},error:{}", JSONObject.toJSONString(userReq), e.getMessage());
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
         }
-        if (background == null){
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "请上传图片！");
+        if (result.getSuccess() == true){
+            return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), result);
+        }else {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_PARAM.getValue(), result);
         }
-        if (flag != null){
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), flag);
-        }
-        String result = null;
-        result = userService.updateBackGround(background, userReq);
-        return null;
     }
 
 }

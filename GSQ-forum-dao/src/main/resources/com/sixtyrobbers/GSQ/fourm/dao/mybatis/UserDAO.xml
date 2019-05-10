@@ -78,5 +78,50 @@
         and valid_flag = 0
     </update>
 
+    <update id="updateUser"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserParam">
+        update gsq_fourm_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="loginEmail != null and loginEmail != ''">
+                login_email = #{loginEmail},
+            </if>
+            <if test="loginPassword != null and loginPassword != ''">
+                login_password = #{loginPassword},
+            </if>
+            <if test="backId != null and backId != ''">
+                back_id = #{backId},
+            </if>
+            <if test="imagId != null and imagId != ''">
+                imag_id = #{imagId},
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="userSex != null and userSex != ''">
+                user_sex = #{userSex},
+            </if>
+            <if test="userIntroduce != null and userIntroduce != ''">
+                user_introduce = #{userIntroduce},
+            </if>
+            <if test="userHobby != null and userHobby != ''">
+                user_hobby = #{userHobby},
+            </if>
+            <if test="userOccupation != null and userOccupation != ''">
+                user_occupation = #{userOccupation},
+            </if>
+            <if test="lastLogin != null and lastLogin != ''">
+                last_login = #{lastLogin},
+            </if>
+            <if test="lastLogout != null and lastLogout != ''">
+                last_logout = #{lastLogout},
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                login_ip = #{loginIp}
+            </if>
+        </trim>
+        WHERE login_phone = #{loginPhone}
+        and valid_flag = 0
+    </update>
+
 
 </mapper>

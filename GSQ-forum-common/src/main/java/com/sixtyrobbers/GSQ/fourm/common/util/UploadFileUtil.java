@@ -1,12 +1,15 @@
 package com.sixtyrobbers.GSQ.fourm.common.util;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,9 +22,7 @@ import java.util.Map;
  */
 public class UploadFileUtil {
 
-    private static final String userBackPath = "D:/";
 
-    private static final String onlinePath = "D:/";
     /**
      * <pre>
      * Explain: 上传文件
@@ -30,16 +31,16 @@ public class UploadFileUtil {
      * Version: V1.0
      * </pre>
      */
-    public static Long uploadFile(CommonsMultipartFile[] files) throws IOException {
-        long batch = System.currentTimeMillis();
-        Map<String, Object> param = new HashMap<>(16);
+    public static List<String> uploadFile(CommonsMultipartFile[] files,String userBackPath,String onlinePath) throws IOException {
+        List<String> pathList = new ArrayList<>();
         for (CommonsMultipartFile commonsMultipartFile : files) {
-            // 获取图片的名字
-            String imageName = commonsMultipartFile.getFileItem().getName().substring(commonsMultipartFile.getFileItem().getName().lastIndexOf('.'));
+            long batch = System.currentTimeMillis();
+            // 获取文件的格式
+            String fileType = commonsMultipartFile.getFileItem().getName().substring(commonsMultipartFile.getFileItem().getName().lastIndexOf('.'));
             // 时间戳防止文件重名
-            String newFileName = System.currentTimeMillis() + imageName;
+            String fileName = batch + fileType;
             // 新的文件
-            File newFile = new File(userBackPath + newFileName);
+            File newFile = new File(userBackPath + fileName);
             InputStream inputStream;
             inputStream = commonsMultipartFile.getInputStream();
             FileOutputStream fileOutputStream = new FileOutputStream(newFile);
@@ -51,11 +52,10 @@ public class UploadFileUtil {
             fileOutputStream.flush();
             inputStream.close();
             fileOutputStream.close();
-
-            String imagePath = onlinePath + newFileName;
+            String imagePath = onlinePath + fileName;
+            pathList.add(imagePath);
         }
-        Long result = (Long) param.get("batch");
-        return result;
+        return pathList;
     }
 
 }

@@ -29,15 +29,21 @@ public class UserPictureDO  implements Serializable {
 	private String id;
 
 	/**
+	 * 用户id
+	 */
+	@Column(name = "user_id" )
+	private String userId;
+
+	/**
 	 * 图片分类
 	 */
-   	@Column(name = "picture_type" )
+	@Column(name = "picture_type" )
 	private Integer pictureType;
 
 	/**
 	 * 图片地址
 	 */
-   	@Column(name = "user_picture_url" )
+	@Column(name = "user_picture_url" )
 	private String userPictureUrl;
 
 	/**
@@ -55,7 +61,7 @@ public class UserPictureDO  implements Serializable {
 	/**
 	 * 有效标志位：0：有效；1：无效
 	 */
-   	@Column(name = "vaild_flag" )
-	private Integer vaildFlag;
+   	@Column(name = "valid_flag" )
+	private Integer validFlag;
 
 }

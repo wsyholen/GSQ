@@ -36,12 +36,23 @@ public interface UserDAO {
     UserDO getUser(UserParam userParam);
 
     /**
+     * <pre>
+     * Explain: 更新用户信息
+     * Author: holennnnnn_
+     * Create_Time: 2019/5/10 10:53
+     * Version: V1.0
+     * </pre>
+     */
+    void updateUser(UserParam userParam);
+
+    /**
      * @Description:    修改密码查找用户手机号
      * @Author:         luoheng
      * @CreateDate:     2019/4/29 18:41
      * @Version:        1.0
      */
      UserDO findUsersByLoginPhone(ModifyPasswordParam modifyPasswordParam);
+
     /**
      * @Description:    修改密码
      * @Author:         luoheng

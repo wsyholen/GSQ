@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.sixtyrobbers.GSQ.fourm.dao.forum.UserPictureDAO">
+
+    <insert id="addUserPicture" parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserPictureParam">
+        insert into
+        gsq_forum_user_picture
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id,
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id,
+            </if>
+            <if test="pictureType !=null and pictureType != ''">
+                picture_type,
+            </if>
+            <if test="userPictureUrl != null and userPictureUrl != ''">
+                user_picture_url
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id, jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null and userId != ''">
+                #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="pictureType != null and pictureType != ''">
+                #{pictureType, jdbcType=VARCHAR},
+            </if>
+            <if test="userPictureUrl != null and userPictureUrl != ''">
+                #{userPictureUrl, jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getUserPicture"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserPictureParam"
+            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserPictureDO">
+        select *
+        from gsq_forum_user_picture
+        where
+        1=1
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        and valid_flag = 0
+    </select>
+
+    <update id="updateUserPicture"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserPictureParam">
+        update gsq_forum_user_picture
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userPictureUrl != null and userPictureUrl != ''">
+                user_picture_url = #{userPictureUrl},
+            </if>
+        </trim>
+        WHERE id = #{id}
+        and valid_flag = 0
+    </update>
+
+
+</mapper>

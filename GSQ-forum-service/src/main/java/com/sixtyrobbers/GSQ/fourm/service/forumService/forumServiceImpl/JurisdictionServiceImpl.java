@@ -11,6 +11,7 @@ import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.JurisdictionRes;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.JurisdictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Array;
@@ -102,7 +103,7 @@ public class JurisdictionServiceImpl implements JurisdictionService {
      * </pre>
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updateJurisdictionByRoleId(JurisdictionReq JurisdictionReq) {
         JurisdictionParam jurisdictionParam = JSON.parseObject(JSON.toJSONString(JurisdictionReq), JurisdictionParam.class);
         jurisdictionDAO.deleteJurisdictionByRoleId(jurisdictionParam);
