@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixtyrobbers.GSQ.fourm.dao.forum.ArticleDao">
+    <insert id="createArticle" parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ArticleParam">
+        INSERT INTO gsq_forum_article(
+          article_id,
+          user_id,
+          article_back_id,
+          article_headline,
+          article_content,
+          article_type_id,
+          article_jurisdiction,
+          article_trigger,
+          recommend,
+          create_time,
+          update_time,
+          update_size,
+          valide_falg
+          )VALUES (
+          #{articleID, jdbcType=VARCHAR},
+          #{userID, jdbcType=VARCHAR},
+          #{pictureID, jdbcType=VARCHAR},
+          #{articleTitle, jdbcType=VARCHAR},
+          #{content, jdbcType=VARCHAR},
+          #{typeID, jdbcType=VARCHAR},
+          ${jurisdiction},
+          0,
+          GETDATE(),
+          GETDATE(),
+          0,
+          1
+          )
+    </insert>
+
+    <update id="updateArticle" parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ArticleParam">
+        UPDATE gsq_forum_article SET
+        <if test="pictureID != null and pictureID != ''">
+            article_back_id = #{pictureID, jdbcType=VARCHAR},
+        </if>
+        <if test="articleTitle != null and articleTitle != ''">
+            article_headline = #{articleTitle, jdbcType=VARCHAR},
+        </if>
+        <if test="content != null and content != ''">
+            article_content = #{content, jdbcType=VARCHAR},
+        </if>
+        <if test="typeID != null and typeID != ''">
+            article_type_id = #{typeID, jdbcType=VARCHAR},
+        </if>
+        <if test="jurisdiction != null and jurisdiction != ''">
+            article_jurisdiction = #{jurisdiction, jdbcType=VARCHAR},
+        </if>
+        update_size = update_size+1
+        WHERE article_id = #{articleID, jdbcType=VARCHAR} AND valide_falg = '0'
+    </update>
+</mapper>
