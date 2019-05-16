@@ -87,7 +87,16 @@ public enum ResponseCodeEnum {
     /**
      * 手机号或密码有误
      */
-    ERROR_CODE_PHONE_PASSWORD_ERROR("2013","手机号或密码有误！");
+    ERROR_CODE_PHONE_PASSWORD_ERROR("2013","手机号或密码有误！"),
+
+    /**
+     * 新增文章失败
+     */
+    ERROR_CODE_ARTICLE_CREATE("4001","新增文章失败!"),
+    /**
+     * 更新文章失败
+     */
+    ERROR_CODE_ARTICLE_UPDATE("4001","更新文章失败!");
 
     private String code;
 
