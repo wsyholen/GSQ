@@ -96,6 +96,13 @@
         </dependency>
         <!-- httpclient end-->
 
+        <!-- 分页 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+        <!-- 分页end -->
         <!-- get set等注解包 start-->
         <dependency>
             <groupId>org.projectlombok</groupId>
