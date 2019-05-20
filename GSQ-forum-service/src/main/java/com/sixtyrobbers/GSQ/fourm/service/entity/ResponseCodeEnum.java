@@ -1,4 +1,4 @@
-package com.sixtyrobbers.GSQ.fourm.controller.entity;
+package com.sixtyrobbers.GSQ.fourm.service.entity;
 
 /**
  * <pre>
@@ -33,11 +33,6 @@ public enum ResponseCodeEnum {
      * 缺少参数
      */
     ERROR_CODE_LACK_PARAM("1003","缺少参数！"),
-
-    /**
-     * 登陆成功
-     */
-    ERROR_CODE_LOGIN_SUCCESS("1004","登陆成功！"),
 
     /**
      * 登陆失败

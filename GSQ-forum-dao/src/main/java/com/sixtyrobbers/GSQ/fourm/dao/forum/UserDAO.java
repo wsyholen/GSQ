@@ -5,6 +5,8 @@ import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.RegisterParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserParam;
 
+import java.util.List;
+
 /**
  * <pre>
  * Explain:

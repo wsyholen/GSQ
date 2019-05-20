@@ -1,5 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.ServiceResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
@@ -26,7 +27,7 @@ public interface UserService {
      * Version: V1.0
      * </pre>
      */
-    void addUser(RegisterReq registerReq);
+    BaseResult addUser(RegisterReq registerReq);
 
     /**
      * @Description: 修改密码
@@ -44,5 +45,9 @@ public interface UserService {
      * Version: V1.0
      * </pre>
      */
-    ServiceResult updateBackGround(CommonsMultipartFile[] background, UserReq userReq);
+    BaseResult updateBackGround(CommonsMultipartFile[] background, UserReq userReq);
+
+    ServiceResult test1(CommonsMultipartFile[] background);
+
+    ServiceResult test2(CommonsMultipartFile[] background);
 }

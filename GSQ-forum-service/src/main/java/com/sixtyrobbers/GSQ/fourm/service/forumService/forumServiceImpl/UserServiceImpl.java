@@ -2,6 +2,8 @@ package com.sixtyrobbers.GSQ.fourm.service.forumService.forumServiceImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
 import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
 import com.sixtyrobbers.GSQ.fourm.common.util.UploadFileUtil;
@@ -14,7 +16,10 @@ import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserPictureParam;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.UserDAO;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.UserPictureDAO;
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.ServiceResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.forum.constant.RedisConstant;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.UserReq;
@@ -23,12 +28,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +59,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserPictureDAO userPictureDAO;
 
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
 
     @Value("${test.user.background.online.path}")
     private String onlinePath;
@@ -68,12 +77,31 @@ public class UserServiceImpl implements UserService {
      * </pre>
      */
     @Override
-    public void addUser(RegisterReq registerReq) {
-        String oid = OIDGennerator.getOID();
-        String password = registerReq.getAccount().substring(registerReq.getAccount().length() - 6);
-        String name = StringUtil.getStringRandom();
-        RegisterParam registerParam = new RegisterParam(oid, registerReq.getAccount(), password, name);
-        userDAO.addUser(registerParam);
+    public BaseResult addUser(RegisterReq registerReq) {
+        String checkResult = null;
+        try {
+            checkResult = CheckObj.checkObjIsNull(registerReq, null);
+        } catch (IllegalAccessException e) {
+            logger.error("添加用户--判断对象为空异常，param:{},error:{}", JSONObject.toJSONString(registerReq), e.getMessage());
+        }
+        if (checkResult != null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), checkResult);
+        }
+        String tempVerifyCode = (String) redisTemplate.opsForValue().get(RedisConstant.REGISTER_VERIFY_CODE + registerReq.getAccount());
+        if (tempVerifyCode == null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_DUE.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_DUE.getValue(), "验证码过期，请重新获取！");
+        }
+        if (!registerReq.getVerificationCode().equals(tempVerifyCode)) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_ERROR.getValue(), "验证码错误，请重新输入！");
+        } else {
+            redisTemplate.delete(RedisConstant.REGISTER_VERIFY_CODE + registerReq.getAccount());
+            String oid = OIDGennerator.getOID();
+            String password = registerReq.getAccount().substring(registerReq.getAccount().length() - 6);
+            String name = StringUtil.getStringRandom();
+            RegisterParam registerParam = new RegisterParam(oid, registerReq.getAccount(), password, name);
+            userDAO.addUser(registerParam);
+            return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_REGISTER_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_REGISTER_SUCCESS.getValue(), "注册成功！");
+        }
     }
 
     /**
@@ -84,11 +112,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String modifyPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq) {
-        ModifyPasswordParam modifyPasswordParam = JSON.parseObject(JSON.toJSONString(modifyPasswordReq),ModifyPasswordParam.class);
-        //UserParam userParam = JSON.parseObject(JSON.toJSONString(modifyPasswordReq),UserParam.class);
-        //UserDO userDO = userDAO.getUser(userParam);
+        ModifyPasswordParam modifyPasswordParam = JSON.parseObject(JSON.toJSONString(modifyPasswordReq), ModifyPasswordParam.class);
         UserDO userDO = userDAO.findUsersByLoginPhone(modifyPasswordParam);
-        if (userDO == null){
+        if (userDO == null) {
             return "请确定账号或密码是否正确！";
         }
         int result = userDAO.modifyPasswordByLoginPhone(modifyPasswordParam);
@@ -105,46 +131,74 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ServiceResult updateBackGround(CommonsMultipartFile[] background, UserReq userReq) {
-        if (background == null){
-            return new ServiceResult(false,"图片不能为空！");
+    public BaseResult updateBackGround(CommonsMultipartFile[] background, UserReq userReq) {
+        if (background == null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "图片不能为空！");
         }
-        String flag = null;
+        String checkResult = null;
         try {
-            flag = CheckObj.checkObjIsNull(userReq,null);
+            checkResult = CheckObj.checkObjIsNull(userReq, null);
         } catch (IllegalAccessException e) {
             logger.error("修改背景图片--判断对象为空异常，param:{},error:{}", JSONObject.toJSONString(userReq), e.getMessage());
         }
-        if (flag != null){
-            return new ServiceResult(false,flag);
+        if (checkResult != null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), checkResult);
         }
-        UserParam userParam = JSON.parseObject(JSON.toJSONString(userReq),UserParam.class);
+        UserParam userParam = JSON.parseObject(JSON.toJSONString(userReq), UserParam.class);
         UserDO userDO = userDAO.getUser(userParam);
-        if (userDO == null){
-            return new ServiceResult(false,"不存在用户信息!");
+        if (userDO == null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_PARAM.getValue(), "不存在用户信息!");
         }
         List<String> pathList = null;
         try {
-            pathList = UploadFileUtil.uploadFile(background,userBackPath,onlinePath);
+            pathList = UploadFileUtil.uploadFile(background, userBackPath, onlinePath);
         } catch (IOException e) {
             logger.error("上传图片--业务异常，param:{},error:{}", e.getMessage());
         }
         String oid = OIDGennerator.getOID();
-        UserPictureParam userPictureParam = new UserPictureParam(oid,userDO.getUserId(),1,pathList.get(0));
+        UserPictureParam userPictureParam = new UserPictureParam(oid, userDO.getUserId(), 1, pathList.get(0));
         //查询用户是否有背景图
         UserPictureDO userPictureDO = userPictureDAO.getUserPicture(userPictureParam);
-        if (userPictureDO != null){
-            UserPictureParam updateUserPictureParam = new UserPictureParam(userPictureDO.getId(),pathList.get(0));
+        if (userPictureDO != null) {
+            UserPictureParam updateUserPictureParam = new UserPictureParam(userPictureDO.getId(), pathList.get(0));
             userPictureDAO.updateUserPicture(updateUserPictureParam);
             File file = new File(userPictureDO.getUserPictureUrl());
             //删除历史文件
             file.delete();
-        }else {
+        } else {
             userPictureDAO.addUserPicture(userPictureParam);
             userParam.setBackId(oid);
             userDAO.updateUser(userParam);
         }
-        return new ServiceResult(true,"修改背景成功！");
+        return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), "修改背景成功!");
+    }
+
+    @Override
+    public ServiceResult test1(CommonsMultipartFile[] background) {
+        List<String> pathList = null;
+        try {
+            long startTime = System.currentTimeMillis();
+            pathList = UploadFileUtil.uploadFile(background, userBackPath, onlinePath);
+            long endTime = System.currentTimeMillis();
+            System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ServiceResult test2(CommonsMultipartFile[] background) {
+        List<String> pathList = null;
+        try {
+            long startTime = System.currentTimeMillis();
+            pathList = UploadFileUtil.uploadFile1(background, userBackPath, onlinePath);
+            long endTime = System.currentTimeMillis();
+            System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

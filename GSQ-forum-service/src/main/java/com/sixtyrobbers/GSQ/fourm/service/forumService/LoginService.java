@@ -1,5 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseRequest;
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.LoginRes;
 
@@ -21,7 +23,7 @@ public interface LoginService {
      * Version: V1.0
      * </pre>
      */
-    LoginRes login(LoginReq loginReq);
+    BaseResult login(LoginReq loginReq);
 
     /**
      * <pre>
@@ -31,6 +33,6 @@ public interface LoginService {
      * Version: V1.0
      * </pre>
      */
-    String sendMessageByMobile(String mobile,String code);
+    BaseResult sendMessageByMobile(LoginReq loginReq);
 
 }

@@ -1,4 +1,4 @@
-package com.sixtyrobbers.GSQ.fourm.controller.entity;
+package com.sixtyrobbers.GSQ.fourm.service.entity;
 
 import lombok.Data;
 

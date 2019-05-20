@@ -1,12 +1,9 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
-import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
-import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.JurisdictionReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.JurisdictionRes;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.JurisdictionService;
 import org.slf4j.Logger;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.enterprise.inject.New;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

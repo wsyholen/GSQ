@@ -1,8 +1,8 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.sixtyrobbers.GSQ.fourm.common.util.GSQUtil;
-import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
-import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ArticleReq;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.ArticleService;
 import org.slf4j.Logger;
@@ -10,15 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageInputStream;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
 /**

@@ -1,21 +1,17 @@
 package com.sixtyrobbers.GSQ.fourm.controller.handler;
 
-import com.sixtyrobbers.GSQ.fourm.controller.entity.BaseResult;
-import com.sixtyrobbers.GSQ.fourm.controller.entity.ResponseCodeEnum;
-import com.sixtyrobbers.GSQ.fourm.controller.forumController.UserController;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 /**
  * <pre>
