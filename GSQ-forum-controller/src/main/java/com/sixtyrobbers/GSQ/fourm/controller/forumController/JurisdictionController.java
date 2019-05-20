@@ -46,19 +46,9 @@ public class JurisdictionController {
      */
     @RequestMapping(value = "/V1.0/getJurisdictionByRoleId", method = RequestMethod.GET)
     @ResponseBody
-    public BaseResult getJurisdictionByRoleId(JurisdictionReq JurisdictionReq) {
-        if (JurisdictionReq.getRoleId() == null || JurisdictionReq.getRoleId() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "角色不能为空!");
-        }
-        Map<String, Object> result = new HashMap<>();
-        try {
-            List<JurisdictionRes> jurisdictionResList = jurisdictionService.getJurisdictionByRoleId(JurisdictionReq);
-            result.put("jurisdictionList", jurisdictionResList);
-        } catch (Exception e) {
-            logger.error("权限查询--业务异常，param:{},error:{}", JSONObject.toJSONString(JurisdictionReq), e.getMessage());
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
-        }
-        return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), result);
+    public BaseResult getJurisdictionByRoleId(JurisdictionReq JurisdictionReq) throws Exception {
+        BaseResult result = jurisdictionService.getJurisdictionByRoleId(JurisdictionReq);
+        return result;
     }
 
     /**
@@ -71,20 +61,9 @@ public class JurisdictionController {
      */
     @RequestMapping(value = "/V1.0/updateJurisdictionByRoleId", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult updateJurisdictionByRoleId(@RequestBody JurisdictionReq JurisdictionReq) {
-        if (JurisdictionReq.getRoleId() == null || JurisdictionReq.getRoleId() == "") {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "角色不能为空!");
-        }
-        if (JurisdictionReq.getMenuDOList().size() == 0) {
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "菜单不能为空!");
-        }
-        try {
-            jurisdictionService.updateJurisdictionByRoleId(JurisdictionReq);
-        } catch (Exception e) {
-            logger.error("权限编辑--业务异常，param:{},error:{}", JSONObject.toJSONString(JurisdictionReq), e.getMessage());
-            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_ERROR.getValue(), "请求失败！");
-        }
-        return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), "编辑成功！");
+    public BaseResult updateJurisdictionByRoleId(@RequestBody JurisdictionReq JurisdictionReq) throws Exception {
+        BaseResult result = jurisdictionService.updateJurisdictionByRoleId(JurisdictionReq);
+        return result;
     }
 
 }

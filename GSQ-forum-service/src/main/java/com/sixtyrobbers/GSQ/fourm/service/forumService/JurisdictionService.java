@@ -1,5 +1,6 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.JurisdictionReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.JurisdictionRes;
 
@@ -23,7 +24,7 @@ public interface JurisdictionService {
      * Version: V1.0
      * </pre>
      */
-    List<JurisdictionRes> getJurisdictionByRoleId(JurisdictionReq JurisdictionReq);
+    BaseResult getJurisdictionByRoleId(JurisdictionReq JurisdictionReq);
 
     /**
      * <pre>
@@ -33,6 +34,6 @@ public interface JurisdictionService {
      * Version: V1.0
      * </pre>
      */
-    void updateJurisdictionByRoleId(JurisdictionReq JurisdictionReq);
+    BaseResult updateJurisdictionByRoleId(JurisdictionReq JurisdictionReq);
 
 }

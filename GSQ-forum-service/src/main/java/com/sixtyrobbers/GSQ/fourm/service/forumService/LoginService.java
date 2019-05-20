@@ -1,9 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
-import com.sixtyrobbers.GSQ.fourm.service.entity.BaseRequest;
 import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.LoginRes;
 
 /**
  * <pre>

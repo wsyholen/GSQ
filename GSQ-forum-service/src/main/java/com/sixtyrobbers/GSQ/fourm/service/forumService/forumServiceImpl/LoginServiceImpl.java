@@ -12,7 +12,6 @@ import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.constant.RedisConstant;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.LoginReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.LoginRes;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,8 +78,7 @@ public class LoginServiceImpl implements LoginService {
         } else {
             loginParam.setLoginPhone(account);
         }
-        LoginDTO loginDTO = loginDAO.login(loginParam);
-        LoginRes result = JSON.parseObject(JSON.toJSONString(loginDTO), LoginRes.class);
+        LoginDTO result = loginDAO.login(loginParam);
         if (result != null) {
             return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), result);
         } else {

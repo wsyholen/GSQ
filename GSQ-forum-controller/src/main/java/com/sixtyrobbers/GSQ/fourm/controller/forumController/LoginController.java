@@ -161,7 +161,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/V1.0/sendVerCode", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult sendVerCode(@RequestBody LoginReq loginReq) {
+    public BaseResult sendVerCode(@RequestBody LoginReq loginReq) throws Exception{
         BaseResult result = loginService.sendMessageByMobile(loginReq);
         return result;
     }
@@ -176,7 +176,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/V1.0/register", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult register(@RequestBody RegisterReq registerReq) {
+    public BaseResult register(@RequestBody RegisterReq registerReq) throws Exception{
         BaseResult result = userService.addUser(registerReq);
         return result;
     }

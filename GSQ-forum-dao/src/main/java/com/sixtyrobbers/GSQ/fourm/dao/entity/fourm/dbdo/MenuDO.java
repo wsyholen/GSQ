@@ -29,7 +29,7 @@ public class MenuDO  implements Serializable {
 	 * 菜单id
 	 */
    	@Column(name = "menu_id" )
-	private String menuId;
+	private Integer menuId;
 
 	/**
 	 * 菜单名称
@@ -44,16 +44,22 @@ public class MenuDO  implements Serializable {
 	private String menuUrl;
 
 	/**
-	 * 是否是父级：0是；1：不是
+	 * 图标url
 	 */
-   	@Column(name = "parent" )
-	private Integer parent;
+	@Column(name = "icon_url" )
+	private String iconUrl;
 
 	/**
-	 * 节点id
+	 * 父级id
 	 */
-   	@Column(name = "node_numer" )
-	private String nodeNumer;
+   	@Column(name = "parent_id" )
+	private Integer parentId;
+
+	/**
+	 * 排序
+	 */
+	@Column(name = "order" )
+	private Integer order;
 
 	/**
 	 * 创建时间

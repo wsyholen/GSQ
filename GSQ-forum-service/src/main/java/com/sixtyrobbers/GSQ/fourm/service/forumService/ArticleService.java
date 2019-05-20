@@ -7,7 +7,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 /**
  * Created by hekang on 19/5/9.
  */
-@Service
 public interface ArticleService {
     void modifyArticle(CommonsMultipartFile[] background, ArticleReq articleReq);
 }

@@ -2,8 +2,6 @@ package com.sixtyrobbers.GSQ.fourm.service.forumService.forumServiceImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.sixtyrobbers.GSQ.fourm.common.util.CheckObj;
 import com.sixtyrobbers.GSQ.fourm.common.util.StringUtil;
 import com.sixtyrobbers.GSQ.fourm.common.util.UploadFileUtil;
@@ -18,7 +16,6 @@ import com.sixtyrobbers.GSQ.fourm.dao.forum.UserDAO;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.UserPictureDAO;
 import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
-import com.sixtyrobbers.GSQ.fourm.service.entity.ServiceResult;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.constant.RedisConstant;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ModifyPasswordReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.RegisterReq;
@@ -35,10 +32,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <pre>
@@ -172,34 +166,5 @@ public class UserServiceImpl implements UserService {
         }
         return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_SUCCESS.getValue(), "修改背景成功!");
     }
-
-    @Override
-    public ServiceResult test1(CommonsMultipartFile[] background) {
-        List<String> pathList = null;
-        try {
-            long startTime = System.currentTimeMillis();
-            pathList = UploadFileUtil.uploadFile(background, userBackPath, onlinePath);
-            long endTime = System.currentTimeMillis();
-            System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public ServiceResult test2(CommonsMultipartFile[] background) {
-        List<String> pathList = null;
-        try {
-            long startTime = System.currentTimeMillis();
-            pathList = UploadFileUtil.uploadFile1(background, userBackPath, onlinePath);
-            long endTime = System.currentTimeMillis();
-            System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
 }
