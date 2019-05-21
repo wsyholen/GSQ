@@ -2,6 +2,7 @@ package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.Serializable;
@@ -18,8 +19,6 @@ public class ArticleReq implements Serializable {
     private String userID;
     //文章标题
     private String articleTitle;
-    //背景图片
-    private File picture;
     //文章内容
     private String content;
     //文章分类ID

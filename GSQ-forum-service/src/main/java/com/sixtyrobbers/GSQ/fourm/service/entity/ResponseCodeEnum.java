@@ -1,4 +1,4 @@
-package com.sixtyrobbers.GSQ.fourm.controller.entity;
+package com.sixtyrobbers.GSQ.fourm.service.entity;
 
 /**
  * <pre>
@@ -33,11 +33,6 @@ public enum ResponseCodeEnum {
      * 缺少参数
      */
     ERROR_CODE_LACK_PARAM("1003","缺少参数！"),
-
-    /**
-     * 登陆成功
-     */
-    ERROR_CODE_LOGIN_SUCCESS("1004","登陆成功！"),
 
     /**
      * 登陆失败
@@ -87,7 +82,16 @@ public enum ResponseCodeEnum {
     /**
      * 手机号或密码有误
      */
-    ERROR_CODE_PHONE_PASSWORD_ERROR("2013","手机号或密码有误！");
+    ERROR_CODE_PHONE_PASSWORD_ERROR("2013","手机号或密码有误！"),
+
+    /**
+     * 新增文章失败
+     */
+    ERROR_CODE_ARTICLE_CREATE("4001","新增文章失败!"),
+    /**
+     * 更新文章失败
+     */
+    ERROR_CODE_ARTICLE_UPDATE("4001","更新文章失败!");
 
     private String code;
 

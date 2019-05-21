@@ -37,8 +37,8 @@ public class RoleMenuDO  implements Serializable {
 	/**
 	 * 菜单节点id
 	 */
-   	@Column(name = "menu_node_numer" )
-	private String menuNodeNumer;
+   	@Column(name = "menu_id" )
+	private Integer menuId;
 
 	/**
 	 * 创建时间
