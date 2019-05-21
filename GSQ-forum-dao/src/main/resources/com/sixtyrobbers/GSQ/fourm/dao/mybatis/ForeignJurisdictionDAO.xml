@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixtyrobbers.GSQ.fourm.dao.forum.ForeignJurisdictionDAO">
+
+    <select id="getUserId"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForeignJurisdictionParam"
+            resultType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserJurisdictionDO">
+        select *
+        from gsq_forum_user_jurisdiction
+        where
+        1=1
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <update id="updateForeignJurisdictionUser"
+            parameterType="com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForeignJurisdictionParam">
+        update gsq_forum_user_jurisdiction
+        <trim prefix="set" suffixOverrides=",">
+            <if test="message != null and message != ''">
+                message = #{message},
+            </if>
+            <if test="attentionliu != null and attentionliu != ''">
+                attentionliu = #{attentionliu},
+            </if>
+            <if test="browsingHistory != null and browsingHistory != ''">
+                browsing_history = #{browsingHistory},
+            </if>
+            <if test="myArticle != null and myArticle != ''">
+                my_article = #{myArticle},
+            </if>
+            <if test="myAttentionliup != null and myAttentionliup != ''">
+                my_attentionliup = #{myAttentionliup},
+            </if>
+            <if test="myComments != null and myComments != ''">
+                my_comments = #{userSex},
+            </if>
+            <if test="myPraise != null and myPraise != ''">
+                my_praise = #{myPraise},
+            </if>
+        </trim>
+        WHERE user_id = #{userId}
+    </update>
+
+
+</mapper>
