@@ -28,18 +28,18 @@ public class ArticleContorller implements Serializable {
 
     @RequestMapping(value = "/V1.0/modifyArticle", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult modifyArticle(@RequestParam(value = "background") CommonsMultipartFile[] background,ArticleReq articleReq)throws Exception {
+    public BaseResult modifyArticle(@RequestParam(value = "background") CommonsMultipartFile[] background, ArticleReq articleReq) throws Exception {
         //入参校验
         BaseResult baseResult = checkModifyArticle(articleReq);
-        if (baseResult != null){
+        if (baseResult != null) {
             return baseResult;
         }
         //维护文章
-        articleService.modifyArticle(background,articleReq);
-        if ("0".equals(articleReq.getOperateFlag())){
+        articleService.modifyArticle(background, articleReq);
+        if ("0".equals(articleReq.getOperateFlag())) {
             //新增文章失败
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ARTICLE_CREATE.getCode(), ResponseCodeEnum.ERROR_CODE_ARTICLE_CREATE.getValue(), "文章标题不能为空!");
-        }else {
+        } else {
             //更新文章失败
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_ARTICLE_UPDATE.getCode(), ResponseCodeEnum.ERROR_CODE_ARTICLE_UPDATE.getValue(), "文章标题不能为空!");
         }
@@ -47,32 +47,33 @@ public class ArticleContorller implements Serializable {
 
     /**
      * 校验文章维护接口参数
+     *
      * @param articleReq
      * @return
      */
-    private BaseResult checkModifyArticle(ArticleReq articleReq) throws Exception{
+    private BaseResult checkModifyArticle(ArticleReq articleReq) throws Exception {
         String userID = articleReq.getUserID();
         String articleTitle = articleReq.getArticleTitle();
         String content = articleReq.getContent();
         String typeID = articleReq.getTypeID();
         String jurisdiction = articleReq.getJurisdiction();
         String operateFlag = articleReq.getOperateFlag();
-        if (GSQUtil.isNullOrEmpty(userID,true)){
+        if (GSQUtil.isNullOrEmpty(userID, true)) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "用户ID不能为空!");
         }
-        if (GSQUtil.isNullOrEmpty(articleTitle,true)){
+        if (GSQUtil.isNullOrEmpty(articleTitle, true)) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "文章标题不能为空!");
         }
-        if (GSQUtil.isNullOrEmpty(content,true)){
+        if (GSQUtil.isNullOrEmpty(content, true)) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "文章内容不能为空!");
         }
-        if (GSQUtil.isNullOrEmpty(typeID,true)){
+        if (GSQUtil.isNullOrEmpty(typeID, true)) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "文章分类不能为空!");
         }
-        if (GSQUtil.isNullOrEmpty(jurisdiction,true)){
+        if (GSQUtil.isNullOrEmpty(jurisdiction, true)) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "文章权限不能为空!");
         }
-        if (GSQUtil.isNullOrEmpty(operateFlag,true)){
+        if (GSQUtil.isNullOrEmpty(operateFlag, true)) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), "操作不能为空!");
         }
         return null;
