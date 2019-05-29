@@ -10,7 +10,8 @@ import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForeignJurisdictionPara
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.JurisdictionParam;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.ForeignJurisdictionDAO;
 import com.sixtyrobbers.GSQ.fourm.dao.forum.JurisdictionDAO;
-import com.sixtyrobbers.GSQ.fourm.service.entity.ServiceResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ForeignJurisdictionReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.JurisdictionReq;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.JurisdictionRes;
@@ -45,25 +46,27 @@ public class ForeignJurisdictionServiceImpl implements ForeignJurisdictionServic
      */
 
     @Override
-    public String updateForeignJurisdictionUser(ForeignJurisdictionReq foreignJurisdictionReq) {
-        String flag = null;
+    public BaseResult updateForeignJurisdictionUser(ForeignJurisdictionReq foreignJurisdictionReq) {
+        String checkResult = null;
         try {
             String param[] = {"userID"};
-            flag = CheckObj.checkObjIsNull(foreignJurisdictionReq,param);
+            checkResult = CheckObj.checkObjIsNull(foreignJurisdictionReq,param);
         } catch (IllegalAccessException e) {
             logger.error("修改用户对外权限--判断对象为空异常，param:{},error:{}", JSONObject.toJSONString(foreignJurisdictionReq), e.getMessage());
         }
-        if (flag != null){
-            return "success";
+        if (checkResult != null){
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), checkResult);
         }
         ForeignJurisdictionParam foreignJurisdictionParam = JSON.parseObject(JSON.toJSONString(foreignJurisdictionReq),ForeignJurisdictionParam.class);
         UserJurisdictionDO userJurisdictionDO  = foreignJurisdictionDAO.getUserId(foreignJurisdictionParam);
         if (userJurisdictionDO == null){
-            return "请确定用户ID是否存在!";
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_USERID_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_USERID_ERROR.getValue(), "请确定用户ID是否存在!");
         }
-        int result = foreignJurisdictionDAO.updateForeignJurisdictionUser(foreignJurisdictionParam);
+        foreignJurisdictionDAO.updateForeignJurisdictionUser(foreignJurisdictionParam);
 
-        return String.valueOf(result);
+        return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_FOREIGNJURISDICTION_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "更新用户对外权限成功！");
+
+
     }
 
 }

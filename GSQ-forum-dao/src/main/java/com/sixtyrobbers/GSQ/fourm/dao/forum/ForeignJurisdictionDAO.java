@@ -27,5 +27,5 @@ public interface ForeignJurisdictionDAO {
      * @CreateDate:     2019/5/15 19:51
      * @Version:        1.0
      */
-     int updateForeignJurisdictionUser(ForeignJurisdictionParam foreignJurisdictionParam);
+     void updateForeignJurisdictionUser(ForeignJurisdictionParam foreignJurisdictionParam);
 }

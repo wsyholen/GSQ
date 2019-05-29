@@ -1,8 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.service.forumService;
 
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ForeignJurisdictionReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.JurisdictionReq;
-import com.sixtyrobbers.GSQ.fourm.service.entity.forum.response.JurisdictionRes;
+import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
 
 import java.util.List;
 
@@ -21,5 +20,5 @@ public interface ForeignJurisdictionService {
     * @Version:        1.0
     */
 
-    String updateForeignJurisdictionUser(ForeignJurisdictionReq foreignJurisdictionReq);
+   BaseResult updateForeignJurisdictionUser(ForeignJurisdictionReq foreignJurisdictionReq);
 }

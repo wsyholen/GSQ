@@ -105,15 +105,68 @@ public class UserServiceImpl implements UserService {
      * @Version: 1.0
      */
     @Override
-    public String modifyPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq) {
+    public BaseResult modifyPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq) {
+        String success = null;
+        try {
+            String param[] = {"loginPhone", "loginPassword", "newPassword", "secondPassword"};
+            success = CheckObj.checkObjIsNull(modifyPasswordReq, param);
+        } catch (IllegalAccessException e) {
+            logger.error("修改密码--判断参数为空异常，param:{},error:{}", JSONObject.toJSONString(modifyPasswordReq), e.getMessage());
+        }
+        if (success != null) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), success);
+        }
+        if (!modifyPasswordReq.getNewPassword().equals(modifyPasswordReq.getSecondPassword())) {
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getValue(), "重新输入的新密码与第一次不一致!");
+        }
         ModifyPasswordParam modifyPasswordParam = JSON.parseObject(JSON.toJSONString(modifyPasswordReq), ModifyPasswordParam.class);
         UserDO userDO = userDAO.findUsersByLoginPhone(modifyPasswordParam);
         if (userDO == null) {
-            return "请确定账号或密码是否正确！";
+            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getValue(), "请确定账号密码是否正确");
         }
-        int result = userDAO.modifyPasswordByLoginPhone(modifyPasswordParam);
-        return String.valueOf(result);
+        userDAO.modifyPasswordByLoginPhone(modifyPasswordParam);
+        return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "修改密码成功！");
     }
+   /**
+    * @Description:    忘记密码
+    * @Author:         luoheng
+    * @CreateDate:     2019/5/29 21:24
+    * @Version:        1.0
+    */
+   @Override
+   public BaseResult forgetPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq) {
+       String success = null;
+       try {
+           String param[] = {"loginPhone", "verificationCode", "newPassword", "secondPassword"};
+           //success = CheckObj.checkObjIsNull(modifyPasswordReq,null);
+           success = CheckObj.checkObjIsNull(modifyPasswordReq, param);
+       } catch (IllegalAccessException e) {
+           logger.error("忘记密码--判断参数为空异常，param:{},error:{}", JSONObject.toJSONString(modifyPasswordReq), e.getMessage());
+       }
+       if (success != null) {
+           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), success);
+       }
+       if (!modifyPasswordReq.getNewPassword().equals(modifyPasswordReq.getSecondPassword())) {
+           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERROR.getValue(), "重新输入的新密码与第一次不一致!");
+       }
+       String tempVerifyCode = (String) redisTemplate.opsForValue().get(RedisConstant.REGISTER_VERIFY_CODE + modifyPasswordReq.getLoginPhone());
+       if (tempVerifyCode == null) {
+           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_DUE.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_DUE.getValue(), "验证码过期，请重新获取！");
+       }
+       ModifyPasswordParam modifyPasswordParam = JSON.parseObject(JSON.toJSONString(modifyPasswordReq), ModifyPasswordParam.class);
+       UserDO userDO = userDAO.findUsersByLoginPhone(modifyPasswordParam);
+       if (userDO == null) {
+           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getValue(), "请确定账号密码是否正确");
+       }
+       if (!modifyPasswordReq.getVerificationCode().equals(tempVerifyCode)) {
+           return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_CODE_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_CODE_ERROR.getValue(), "验证码错误，请重新输入！");
+       }else{
+           userDAO.modifyPasswordByLoginPhone(modifyPasswordParam);
+           return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "修改密码成功！");
+       }
+
+
+   }
 
     /**
      * <pre>

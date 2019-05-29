@@ -1,6 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.controller.forumController;
 
 import com.sixtyrobbers.GSQ.fourm.service.entity.BaseResult;
+import com.sixtyrobbers.GSQ.fourm.service.entity.ResponseCodeEnum;
 import com.sixtyrobbers.GSQ.fourm.service.entity.forum.request.ForeignJurisdictionReq;
 import com.sixtyrobbers.GSQ.fourm.service.forumService.ForeignJurisdictionService;
 import org.slf4j.Logger;
@@ -37,15 +38,8 @@ public class ForeignJurisdictionController {
     @RequestMapping(value = "/V1.0/updateForeignJurisdictionUser", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult login(@RequestBody ForeignJurisdictionReq foreignJurisdictionReq)throws Exception{
-        String result = foreignJurisdictionService.updateForeignJurisdictionUser(foreignJurisdictionReq);
-//        if (result.equals("1")){
-//            return new BaseResult(true, ResponseCodeEnum.ERROR_CODE_FOREIGNJURISDICTION_SUCCESS.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_SUCCESS.getValue(), "更新用户对外权限成功！");
-//        }else if (result.equals("0")){
-//            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_FOREIGNJURISDICTION_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_MODIFY_ERRORS.getValue(), "更新用户对外权限失败！");
-//        }else if (result.equals("请确定用户ID是否存在!")){
-//            return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_USERID_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_PHONE_PASSWORD_ERROR.getValue(), result);
-//        }
-        return null;
+        BaseResult result = foreignJurisdictionService.updateForeignJurisdictionUser(foreignJurisdictionReq);
+        return result;
     }
 
 

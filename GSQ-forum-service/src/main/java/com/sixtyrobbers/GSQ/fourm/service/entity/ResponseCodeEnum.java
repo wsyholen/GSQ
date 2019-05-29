@@ -91,7 +91,19 @@ public enum ResponseCodeEnum {
     /**
      * 更新文章失败
      */
-    ERROR_CODE_ARTICLE_UPDATE("4001","更新文章失败!");
+    ERROR_CODE_ARTICLE_UPDATE("4001","更新文章失败!"),
+    /**
+     * 修改用户对外权限成功
+     */
+    ERROR_CODE_FOREIGNJURISDICTION_SUCCESS("2014","修改用户对外成功！"),
+    /**
+     * 修改用户对外权限失败
+     */
+    ERROR_CODE_FOREIGNJURISDICTION_ERROR("2015","修改用户对外失败！"),
+    /**
+     * 用户ID有误
+     */
+    ERROR_CODE_USERID_ERROR("2016","用户ID有误！");
 
     private String code;
 

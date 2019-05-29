@@ -1,6 +1,7 @@
 package com.sixtyrobbers.GSQ.fourm.dao.forum;
 
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.dbdo.UserDO;
+import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ForeignJurisdictionParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.ModifyPasswordParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.RegisterParam;
 import com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param.UserParam;
@@ -37,6 +38,8 @@ public interface UserDAO {
      */
     UserDO getUser(UserParam userParam);
 
+
+
     /**
      * <pre>
      * Explain: 更新用户信息
@@ -61,6 +64,7 @@ public interface UserDAO {
      * @CreateDate:     2019/4/29 18:42
      * @Version:        1.0
      */
-     int modifyPasswordByLoginPhone(ModifyPasswordParam modifyPasswordParam);
+     void modifyPasswordByLoginPhone(ModifyPasswordParam modifyPasswordParam);
+
 
 }
