@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
 /**
- * @Description:    更新用户对外权限
- * @Author:         luoheng
- * @CreateDate:     2019/5/15 21:49
- * @Version:        1.0
+ * @Description: 更新用户对外权限
+ * @Author: luoheng
+ * @CreateDate: 2019/5/15 21:49
+ * @Version: 1.0
  */
 @Controller
 @RequestMapping("/jurisdiction")
@@ -29,15 +28,16 @@ public class ForeignJurisdictionController {
 
     @Autowired
     private ForeignJurisdictionService foreignJurisdictionService;
+
     /**
-     * @Description:    用户对外权限修改
-     * @Author:         luoheng
-     * @CreateDate:     2019/5/15 20:43
-     * @Version:        1.0
+     * @Description: 用户对外权限修改
+     * @Author: luoheng
+     * @CreateDate: 2019/5/15 20:43
+     * @Version: 1.0
      */
     @RequestMapping(value = "/V1.0/updateForeignJurisdictionUser", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult login(@RequestBody ForeignJurisdictionReq foreignJurisdictionReq)throws Exception{
+    public BaseResult login(@RequestBody ForeignJurisdictionReq foreignJurisdictionReq) throws Exception {
         BaseResult result = foreignJurisdictionService.updateForeignJurisdictionUser(foreignJurisdictionReq);
         return result;
     }

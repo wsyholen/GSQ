@@ -3,11 +3,12 @@ package com.sixtyrobbers.GSQ.fourm.dao.entity.fourm.param;
 import lombok.Data;
 
 import java.io.Serializable;
+
 /**
  * @Description:
- * @Author:         luoheng
- * @CreateDate:     2019/5/15 19:55
- * @Version:        1.0
+ * @Author: luoheng
+ * @CreateDate: 2019/5/15 19:55
+ * @Version: 1.0
  */
 @Data
 public class ForeignJurisdictionParam implements Serializable {

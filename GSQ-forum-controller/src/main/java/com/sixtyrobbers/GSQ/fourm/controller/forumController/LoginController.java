@@ -93,14 +93,10 @@ public class LoginController {
      */
     @RequestMapping(value = "/V1.0/forgetPassword", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult forgetPassword(@RequestBody ModifyPasswordReq modifyPasswordReq) throws Exception{
-         redisTemplate.delete(RedisConstant.REGISTER_VERIFY_CODE + modifyPasswordReq.getLoginPhone());
-            BaseResult result = userService.modifyPasswordByLoginPhone(modifyPasswordReq);
-
-                return result;
-
-
-
+    public BaseResult forgetPassword(@RequestBody ModifyPasswordReq modifyPasswordReq) throws Exception {
+        redisTemplate.delete(RedisConstant.REGISTER_VERIFY_CODE + modifyPasswordReq.getLoginPhone());
+        BaseResult result = userService.modifyPasswordByLoginPhone(modifyPasswordReq);
+        return result;
     }
 
     /**
@@ -113,7 +109,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/V1.0/sendVerCode", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult sendVerCode(@RequestBody LoginReq loginReq) throws Exception{
+    public BaseResult sendVerCode(@RequestBody LoginReq loginReq) throws Exception {
         BaseResult result = loginService.sendMessageByMobile(loginReq);
         return result;
     }
@@ -128,7 +124,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/V1.0/register", method = RequestMethod.POST)
     @ResponseBody
-    public BaseResult register(@RequestBody RegisterReq registerReq) throws Exception{
+    public BaseResult register(@RequestBody RegisterReq registerReq) throws Exception {
         BaseResult result = userService.addUser(registerReq);
         return result;
     }

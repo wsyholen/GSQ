@@ -3,14 +3,16 @@ package com.sixtyrobbers.GSQ.fourm.service.entity.forum.request;
 import lombok.Data;
 
 import java.io.Serializable;
+
 /**
- * @Description:    用户对外权限请求参数
- * @Author:         luoheng
- * @CreateDate:     2019/5/9 22:54
- * @Version:        1.0
+ * @Description: 用户对外权限请求参数
+ * @Author: luoheng
+ * @CreateDate: 2019/5/9 22:54
+ * @Version: 1.0
  */
 @Data
 public class ForeignJurisdictionReq implements Serializable {
+
     private static final long serialVersionUID = 1218537313300352771L;
 
     /**

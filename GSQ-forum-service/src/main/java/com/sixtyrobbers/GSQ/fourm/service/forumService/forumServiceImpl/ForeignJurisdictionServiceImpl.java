@@ -28,9 +28,9 @@ import java.util.List;
 
 /**
  * @Description:
- * @Author:         luoheng
- * @CreateDate:     2019/5/15 21:34
- * @Version:        1.0
+ * @Author: luoheng
+ * @CreateDate: 2019/5/15 21:34
+ * @Version: 1.0
  */
 @Service
 public class ForeignJurisdictionServiceImpl implements ForeignJurisdictionService {
@@ -38,11 +38,12 @@ public class ForeignJurisdictionServiceImpl implements ForeignJurisdictionServic
 
     @Autowired
     private ForeignJurisdictionDAO foreignJurisdictionDAO;
+
     /**
-     * @Description:    更新用户对外权限
-     * @Author:         luoheng
-     * @CreateDate:     2019/5/15 21:36
-     * @Version:        1.0
+     * @Description: 更新用户对外权限
+     * @Author: luoheng
+     * @CreateDate: 2019/5/15 21:36
+     * @Version: 1.0
      */
 
     @Override
@@ -50,16 +51,16 @@ public class ForeignJurisdictionServiceImpl implements ForeignJurisdictionServic
         String checkResult = null;
         try {
             String param[] = {"userID"};
-            checkResult = CheckObj.checkObjIsNull(foreignJurisdictionReq,param);
+            checkResult = CheckObj.checkObjIsNull(foreignJurisdictionReq, param);
         } catch (IllegalAccessException e) {
             logger.error("修改用户对外权限--判断对象为空异常，param:{},error:{}", JSONObject.toJSONString(foreignJurisdictionReq), e.getMessage());
         }
-        if (checkResult != null){
+        if (checkResult != null) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getCode(), ResponseCodeEnum.ERROR_CODE_LACK_PARAM.getValue(), checkResult);
         }
-        ForeignJurisdictionParam foreignJurisdictionParam = JSON.parseObject(JSON.toJSONString(foreignJurisdictionReq),ForeignJurisdictionParam.class);
-        UserJurisdictionDO userJurisdictionDO  = foreignJurisdictionDAO.getUserId(foreignJurisdictionParam);
-        if (userJurisdictionDO == null){
+        ForeignJurisdictionParam foreignJurisdictionParam = JSON.parseObject(JSON.toJSONString(foreignJurisdictionReq), ForeignJurisdictionParam.class);
+        UserJurisdictionDO userJurisdictionDO = foreignJurisdictionDAO.getUserId(foreignJurisdictionParam);
+        if (userJurisdictionDO == null) {
             return new BaseResult(false, ResponseCodeEnum.ERROR_CODE_USERID_ERROR.getCode(), ResponseCodeEnum.ERROR_CODE_USERID_ERROR.getValue(), "请确定用户ID是否存在!");
         }
         foreignJurisdictionDAO.updateForeignJurisdictionUser(foreignJurisdictionParam);

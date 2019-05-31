@@ -33,13 +33,15 @@ public interface UserService {
      * @Version: 1.0
      */
     BaseResult modifyPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq);
+
     /**
-     * @Description:    修改密码之忘记密码
-     * @Author:         luoheng
-     * @CreateDate:     2019/5/29 21:23
-     * @Version:        1.0
+     * @Description: 修改密码之忘记密码
+     * @Author: luoheng
+     * @CreateDate: 2019/5/29 21:23
+     * @Version: 1.0
      */
     BaseResult forgetPasswordByLoginPhone(ModifyPasswordReq modifyPasswordReq);
+
     /**
      * <pre>
      * Explain: 修改背景图片
