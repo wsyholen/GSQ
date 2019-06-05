@@ -20,25 +20,25 @@
         update gsq_forum_user_jurisdiction
         <trim prefix="set" suffixOverrides=",">
             <if test="message != null and message != ''">
-                message = #{message},
+                message = #{message,jdbcType=INTEGER},
             </if>
             <if test="attentionliu != null and attentionliu != ''">
-                attentionliu = #{attentionliu},
+                attentionliu = #{attentionliu,jdbcType=INTEGER},
             </if>
             <if test="browsingHistory != null and browsingHistory != ''">
-                browsing_history = #{browsingHistory},
+                browsing_history = #{browsingHistory,jdbcType=INTEGER},
             </if>
             <if test="myArticle != null and myArticle != ''">
-                my_article = #{myArticle},
+                my_article = #{myArticle,jdbcType=INTEGER},
             </if>
             <if test="myAttentionliup != null and myAttentionliup != ''">
-                my_attentionliup = #{myAttentionliup},
+                my_attentionliup = #{myAttentionliup,jdbcType=INTEGER},
             </if>
             <if test="myComments != null and myComments != ''">
-                my_comments = #{userSex},
+                my_comments = #{userSex,jdbcType=INTEGER},
             </if>
             <if test="myPraise != null and myPraise != ''">
-                my_praise = #{myPraise},
+                my_praise = #{myPraise,jdbcType=INTEGER},
             </if>
         </trim>
         WHERE user_id = #{userId}
