@@ -8,7 +8,7 @@
     </appender>
 
     <appender name="eventFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>../logs/sixtyrobbers-GSQ-fourm.log</File>
+        <File>../logs/smartcare-expand-platform.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>../logs/sixtyrobbers-GSQ-fourm.%d{yyyy-MM-dd}.log</FileNamePattern>
             <maxHistory>15</maxHistory>
