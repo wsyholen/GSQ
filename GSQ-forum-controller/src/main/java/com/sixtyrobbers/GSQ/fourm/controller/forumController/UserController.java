@@ -38,4 +38,9 @@ public class UserController {
         return result;
     }
 
+    public BaseResult test(@RequestParam(value = "background") CommonsMultipartFile[] background, UserReq userReq) throws Exception {
+        BaseResult result = userService.updateBackGround(background, userReq);
+        return result;
+    }
+
 }
