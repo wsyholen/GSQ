@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <spring.version>3.2.15.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
         <healthcare.version>1.0-SNAPSHOT</healthcare.version>
         <log4j.version>1.2.16</log4j.version>
     </properties>
